@@ -1,26 +1,25 @@
-import constants from "../constants";
-
-import Message from "../components/Message.vue";
+import constants from '../constants'
+import Message from '../components/Message.vue;
 
 export default {
-    data: () => ({
-        message: {
-            state: constants.MESSAGE_STATUS,
-            text: "",
-        },
-    }),
+  data: () => ({
+    message: {
+      state: constants.MESSAGE_STATUS,
+      text: ''
+    }
+  }),
 
-    components: {
-        Message,
-    },
+  components: {
+    Message
+  },
 
-    methods: {
-        setMessage(text, state) {
-            this.message.text = text;
-            this.message.state = state;
-        },
-        emitMessage(text, state, eventName = "message-update") {
-            this.$emit(eventName, text, state);
-        },
+  methods: {
+    setMessage (text, state) {
+      this.message.text = text
+      this.message.state = state
     },
+    emitMessage (text, state, eventName = 'message-update') {
+      this.$emit(eventName, text, state)
+    }
+  }
 };

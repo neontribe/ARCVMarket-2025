@@ -1,3 +1,5 @@
+import mitt from 'mitt'
+
 /**
  * @file events.js
  *
@@ -5,5 +7,5 @@
  * It uses the event system built into Vue and can be included in any file.
  */
 
-import Vue from "vue";
-export const EventBus = new Vue();
+const EventBus = mitt();
+export default EventBu;
