@@ -41,17 +41,17 @@ EventBus.$on('NetMgr.logout', function (statusCode = null) {
     switch (statusCode) {
       // Refresh token failed
       case 401:
-        message.text = constants.copy.TIMEOUT_LOGOUT
-        message.state = constants.MESSAGE_WARNING
-        break
+        message.text = constants.copy.TIMEOUT_LOGOUT;
+        message.state = constants.MESSAGE_WARNING;
+        break;
       // Access forbidden, Trader probably disabled for that User
       case 403:
-        message.text = constants.copy.FORCED_LOGOUT
-        message.state = constants.MESSAGE_WARNING
-        break
+        message.text = constants.copy.FORCED_LOGOUT;
+        message.state = constants.MESSAGE_WARNING;
+        break;
       default:
-        message.text = constants.copy.UNKNOWN_EVENT
-        message.state = constants.MESSAGE_ERROR
+        message.text = constants.copy.UNKNOWN_EVENT;
+        message.state = constants.MESSAGE_ERROR;
     }
     routeObj.params = { passedMessage: message };
   }
