@@ -1,10 +1,11 @@
-import { createApp } from 'vue'
-import EventBus from './services/events'
-import App from './App.vue'
-import Store from './store'
-import router from './router'
-import constants from './constants'
-import pjson from '../package.json'
+import { createApp } from 'vue';
+import EventBus from './services/events';
+import Config from './config.js';
+import App from './App.vue';
+import Store from './store';
+import router from './router';
+import constants from './constants';
+import pjson from '../package.json';
 
 console.info(
   'Build date: ' +
@@ -16,27 +17,27 @@ console.info(
 );
 console.log('Package Version', pjson.version);
 
-const app = createApp(App;
-app.mount('#app';
-app.config.globalProperties.$store = Stor;
-app.config.globalProperties.$emit = EventBu;
+const app = createApp(App);
+app.mount('#app');
+app.config.globalProperties.$store = Store;
+app.config.globalProperties.$emit = EventBus;
 app.mixin({
   mounted() {
-    Store.config = Confi;
+    Store.config = Config;
   }
-};
+});
 
 /**
  * Reset all stored information and redirect the user back to the login page when 'NetMgr.logout' is fired.
  */
 EventBus.$on('NetMgr.logout', function (statusCode = null) {
-  Store.resetStore()
+  Store.resetStore();
 
   // Setup the route object
-  let routeObj = { name: 'login' }
+  let routeObj = { name: 'login' };
   // Shall we prep a message for the login page
   if (statusCode) {
-    let message = {}
+    let message = {};
     switch (statusCode) {
       // Refresh token failed
       case 401:
@@ -52,7 +53,7 @@ EventBus.$on('NetMgr.logout', function (statusCode = null) {
         message.text = constants.copy.UNKNOWN_EVENT
         message.state = constants.MESSAGE_ERROR
     }
-    routeObj.params = { passedMessage: message }
+    routeObj.params = { passedMessage: message };
   }
-  router.push(routeObj)
+  router.push(routeObj);
 });

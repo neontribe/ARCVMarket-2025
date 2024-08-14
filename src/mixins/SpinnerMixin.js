@@ -1,22 +1,22 @@
-import Spinner from '../components/Spinner.vue'
+import Spinner from "../components/Spinner.vue";
 
 export default {
-  data: () => {
-    return {
-      spinnerActive: false
-    ;
-  },
-
-  components: {
-    Spinner
-  },
-
-  methods: {
-    showSpinner () {
-      this.spinnerActive = true
+    data: () => {
+        return {
+            spinnerActive: false,
+        };
     },
-    hideSpinner () {
-      this.spinnerActive = false
-    }
-  }
+
+    components: {
+        Spinner,
+    },
+
+    methods: {
+        showSpinner() {
+            this.spinnerActive = true;
+        },
+        hideSpinner() {
+            this.spinnerActive = false;
+        },
+    },
 };
