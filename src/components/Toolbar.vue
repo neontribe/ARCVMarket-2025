@@ -40,7 +40,9 @@ export default {
         };
     },
     mounted: function () {
-        Store.maybeGetRecVouchers();
+        if (Store.auth) {
+            Store.maybeGetRecVouchers();
+        }
     },
     computed: {
         voucherCount: function () {

@@ -42,7 +42,9 @@ export default {
         },
     },
     mounted: function () {
-        Store.getUserTraders();
+        if (Store.auth) {
+            Store.getUserTraders();
+        }
     },
 };
 </script>
