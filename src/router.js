@@ -54,7 +54,7 @@ const routes = [
     meta: { auth: false }
   },
   { path: '/user', component: User, meta: { auth: true } },
-  { path: '*', redirect: '/' }
+  { path: '/:pathMatch(.*)', redirect: '/' }
 ];
 
 const router = createRouter({
