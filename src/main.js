@@ -17,9 +17,7 @@ console.info(
 );
 console.log('Package Version', pjson.version);
 
-const app = createApp(App)
-  .use(router)
-  .mount('#app');
+const app = createApp(App);
 
 app.config.globalProperties.$store = Store;
 app.config.globalProperties.$emit = EventBus;
@@ -28,6 +26,8 @@ app.mixin({
     Store.config = Config;
   }
 });
+app.use(router);
+app.mount('#app');
 
 /**
  * Reset all stored information and redirect the user back to the login page when 'NetMgr.logout' is fired.
