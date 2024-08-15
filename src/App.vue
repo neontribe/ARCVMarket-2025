@@ -1,7 +1,11 @@
 <template>
     <div id="app">
         <masthead></masthead>
-        <transition name="fade"><router-view></router-view></transition>
+        <router-view v-slot="{ Component }">
+            <transition name="fade">
+                <Component :is="Component" />
+            </transition>
+        </router-view>
         <privacy-link v-if="footerShow"></privacy-link>
     </div>
 </template>
