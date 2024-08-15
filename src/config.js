@@ -15,14 +15,13 @@ if (location.hostname.match(/voucher-staging/)) {
 if (location.hostname.match(/localhost|(\.(dev|test))$/)) {
     env = "development";
     apiBase =
-        process.env.API_BASE ||
+        import.meta.env.VITE_API_BASE ||
         window.location.protocol + "//arcv-service.test/api";
     useMocks =
-        process.env.USE_MOCKS ||
+        import.meta.env.VITE_USE_MOCKS ||
         document.cookie.indexOf("arcv_use_mocks=true") >= 0;
 }
-console.log(window.location);
-console.log("ENV: development");
+console.log("ENV:", import.meta.env.MODE);
 console.log("apiBase", apiBase);
 console.log("useMocks", useMocks);
 
