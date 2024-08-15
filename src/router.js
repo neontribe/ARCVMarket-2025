@@ -57,17 +57,18 @@ const routes = [
   { path: '/:pathMatch(.*)', redirect: '/' }
 ];
 
+const base =
+  window.location.pathname
+    // Split it up into path components
+    .split('/')
+    // Chop the last one off, there may only be one
+    .slice(0, -1)
+    // Rejoin the remainder (if any) and tap "/" on the back.
+    .join('/') + '/'
+
 const router = createRouter({
   routes,
-  history: createWebHistory(),
-  base:
-    window.location.pathname
-      // Split it up into path components
-      .split('/')
-      // Chop the last one off, there may only be one
-      .slice(0, -1)
-      // Rejoin the remainder (if any) and tap "/" on the back.
-      .join('/') + '/'
+  history: createWebHistory(base),
 });
 
 // Route Guard rules for directing users

@@ -17,8 +17,10 @@ console.info(
 );
 console.log('Package Version', pjson.version);
 
-const app = createApp(App);
-app.mount('#app');
+const app = createApp(App)
+  .use(router)
+  .mount('#app');
+
 app.config.globalProperties.$store = Store;
 app.config.globalProperties.$emit = EventBus;
 app.mixin({

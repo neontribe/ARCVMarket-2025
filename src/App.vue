@@ -9,6 +9,7 @@
 <script>
 import Masthead from "./components/Masthead.vue";
 import PrivacyLink from "./components/PrivacyLink.vue";
+
 export default {
     name: "app",
     components: {
@@ -18,7 +19,7 @@ export default {
     computed: {
         footerShow: function () {
             const paths = ["/", "/scan", "/payment", "/account"];
-            return paths.indexOf(this.$route.path) !== -1;
+            return paths.indexOf(this.$route.path) !== - 1;
         },
     },
 };
