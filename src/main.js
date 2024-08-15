@@ -9,7 +9,7 @@ import pjson from '../package.json';
 
 console.info(
   'Build date: ' +
-    BUILDDATE +
+    BUILD_DATE +
     '\nBranch: ' +
     BRANCH +
     '\nGit commit: ' +
