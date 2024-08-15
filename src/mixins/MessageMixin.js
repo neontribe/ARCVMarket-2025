@@ -15,12 +15,11 @@ export default {
     },
 
     methods: {
-        setMessage(text, state) {
-            this.message.text = text;
-            this.message.state = state;
+        setMessage(message) {
+            this.message = message;
         },
-        emitMessage(text, state, eventName = "message-update") {
-            this.$emit(eventName, text, state);
+        emitMessage(text, state = null, eventName = "message-update") {
+            this.$eventBus.emit(eventName, { text: text, state: state });
         },
     },
 };

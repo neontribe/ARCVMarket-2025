@@ -20,7 +20,7 @@ console.log('Package Version', pjson.version);
 const app = createApp(App);
 
 app.config.globalProperties.$store = Store;
-app.config.globalProperties.$emit = EventBus;
+app.config.globalProperties.$eventBus = EventBus;
 app.mixin({
   mounted() {
     Store.config = Config;
@@ -32,7 +32,7 @@ app.mount('#app');
 /**
  * Reset all stored information and redirect the user back to the login page when 'NetMgr.logout' is fired.
  */
-EventBus.$on('NetMgr.logout', function (statusCode = null) {
+EventBus.on('NetMgr.logout', function (statusCode = null) {
   Store.resetStore();
 
   // Setup the route object

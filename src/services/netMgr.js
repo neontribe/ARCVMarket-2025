@@ -199,7 +199,7 @@ NetMgr.setOnlineStatus = function (onlineStatus = true) {
     const diff = onlineStatus !== this.online;
     if (diff) {
         this.online = onlineStatus;
-        EventBus.$emit("NetMgr.onlineStatusChange", this.online);
+        EventBus.emit("NetMgr.onlineStatusChange", this.online);
     }
 };
 
@@ -361,7 +361,7 @@ function responseErrorInterceptor(error) {
     // is it a 403? User tried something bad, broadcast a Logout event, someone will deal.
     if (origResp.status === 403) {
         NetMgr.setToken(null);
-        EventBus.$emit("NetMgr.logout", 403);
+        EventBus.emit("NetMgr.logout", 403);
     }
 
     // Is it a 401 we have not seen before? (and do we have an old token set)
@@ -388,7 +388,7 @@ function responseErrorInterceptor(error) {
                             return NetMgr.axiosInstance(origCfg); // Retry the request that errored out.
                         } else {
                             NetMgr.setToken(null);
-                            EventBus.$emit("NetMgr.logout", 401);
+                            EventBus.emit("NetMgr.logout", 401);
                         }
                     },
                     (refreshErr) => {
