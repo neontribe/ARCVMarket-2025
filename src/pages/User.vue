@@ -63,11 +63,14 @@ export default {
     },
     computed: {
         traderList: function () {
-            return this.userTraders[0] && this.userTraders[0].length > 1;
+            console.log("computed");
+            return this.userTraders[0]?.length > 1 || false;
         },
     },
     mounted: function () {
         Store.getUserTraders();
+        console.log(this.userTraders);
+        console.log("mounted");
     },
     methods: {
         onContinue: function () {
@@ -76,10 +79,7 @@ export default {
             }
         },
         redirect: function () {
-            let redirect = this.$route.query.redirect;
-            if (!redirect) {
-                redirect = "/";
-            }
+            const redirect = this.$route.query?.redirect || "/";
             this.$router.push({ path: redirect });
         },
     },

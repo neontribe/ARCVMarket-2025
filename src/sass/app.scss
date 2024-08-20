@@ -1,9 +1,10 @@
 /* Copyright (c) 2023, Alexandra Rose Charity (reg. in England and Wales, #00279157) */
-/*
-$fa-font-path: "../node_modules/font-awesome/fonts";
-*/
+
+$fa-font-path: "../node_modules/@fortawesome/fontawesome-free/webfonts";
 
 @import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '@fortawesome/fontawesome-free/scss/solid';
+@import '@fortawesome/fontawesome-free/scss/v4-shims';
 @import './fonts';
 @import './vars';
 /* --------------------------------------------------------------
@@ -828,7 +829,7 @@ h1.expandable.queue {
 
     &[type='checkbox'] + label::before {
       font-weight: bold;
-      font-family: FontAwesome, sans-serif;
+      font-family: FontAwesome, serif;
       content: '\f0da';
       color: $arc_rose;
     }

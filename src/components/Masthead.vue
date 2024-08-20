@@ -18,12 +18,11 @@
                 /></router-link>
                 <img v-else src="../assets/logo.png" alt="ARC Voucher logo" />
             </div>
-
             <nav role="navigation" v-if="headerFull">
                 <ul>
                     <li>
                         <router-link v-bind:to="'/'"
-                            ><i class="fa fa-keyboard-o" aria-hidden="true"></i
+                            ><i class="fa fa-keyboard-o" aria-hidden="true"> </i
                             ><br />Add Voucher</router-link
                         >
                     </li>
@@ -64,7 +63,7 @@ export default {
         },
         toolbarShow: function () {
             const paths = ["/", "/scan"];
-            return !(paths.indexOf(this.$route.path) === -1);
+            return paths.indexOf(this.$route.path) !== -1;
         },
     },
 };
