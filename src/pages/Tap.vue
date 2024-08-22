@@ -11,10 +11,10 @@
                     ></message>
 
                     <label id="lblSponsorBox" class="hidden" for="sponsorBox"
-                        >Sponsor code</label
+                        >Sponsor Code</label
                     >
                     <label id="lblVoucherBox" class="hidden" for="voucherBox"
-                        >Voucher code</label
+                        >Voucher Code</label
                     >
 
                     <div class="input-box">
@@ -25,7 +25,7 @@
                             maxlength="5"
                             minlength="2"
                             type="text"
-                            @keypress="onKeypressSponsorBox"
+                            @keydown="onKeypressSponsorBox"
                             v-on:paste.prevent
                         />
                         <input
@@ -36,7 +36,7 @@
                             minlength="4"
                             pattern="[0-9]*"
                             type="tel"
-                            @keypress="onKeypressVoucherBox"
+                            @keydown="onKeypressVoucherBox"
                             v-on:paste.prevent
                             v-on:keyup.delete="onDelVoucherBox"
                         />
@@ -61,15 +61,15 @@
 <script>
 import Store from "../store.js";
 import Queue from "../components/Queue.vue";
-import constants from "../constants";
-import MessageMix from "../mixins/MessageMixin";
+import constants from "../constants.js";
 import AsyncButtonMixin from "../mixins/AsyncButtonMixin";
+import MessageMixin from "../mixins/MessageMixin";
 
-const RESULT_TIMER = 2000;
+const RESULT_TIMER = 1000;
 
 export default {
     name: "tap",
-    mixins: [MessageMix, AsyncButtonMixin],
+    mixins: [MessageMixin, AsyncButtonMixin],
     components: {
         Queue,
     },
@@ -131,7 +131,6 @@ export default {
                         }
                     }
                 );
-
                 // Do anyway.
                 this.voucherCode = "";
             } else {

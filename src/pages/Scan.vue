@@ -22,32 +22,31 @@
                             id="sponsorBox"
                             ref="sponsorBox"
                             v-model="sponsorCode"
-                            autocomplete="off"
-                            autofocus="autofocus"
                             maxlength="5"
                             minlength="2"
                             type="text"
-                            v-bind:class="{ 'input-text-hidden': queued }"
-                            @keypress="onKeypressSponsorBox"
-                            @keydown.enter.prevent
+                            @keydown="onKeypressSponsorBox"
                             v-on:paste.prevent
+                            @keydown.enter.prevent
+                            v-bind:class="{ 'input-text-hidden': queued }"
+                            autocomplete="off"
+                            autofocus="autofocus"
                         />
                         <input
                             id="voucherBox"
                             ref="voucherBox"
                             v-model="voucherCode"
-                            autocomplete="off"
                             maxlength="8"
                             minlength="4"
                             pattern="[0-9]*"
                             type="tel"
-                            v-bind:class="{ 'input-text-hidden': queued }"
-                            @keypress="onKeypressVoucherBox"
+                            @keydown="onKeypressVoucherBox"
                             v-on:paste.prevent
                             v-on:keyup.delete="onDelVoucherBox"
+                            autocomplete="off"
+                            v-bind:class="{ 'input-text-hidden': queued }"
                         />
                     </div>
-
                     <async-button
                         id="submit-voucher"
                         v-bind:state="state"
@@ -95,7 +94,7 @@ export default {
             //TODO: some proper validation
             // When the voucher is submitted, cancel the typing in voucher box timer
             TIMER = null;
-            if (this.voucherCode !== null && this.voucherCode.length > 0) {
+            if (this.voucherCode?.length > 0) {
                 this.startSpinner();
                 Store.addVoucherCode(
                     this.sponsorCode.toUpperCase() + this.voucherCode,
@@ -120,17 +119,16 @@ export default {
                             this.message = {};
                             // We're intentionally not setting to responseData.message here.
                         }
-
                         // The server has processed our list, clear it.
                         Store.clearVouchers();
                         Store.getRecVouchers();
                     },
                     // Failure function, hook for error message
-                    // Network error of some kind;
-                    // Don't clear the voucher list!
                     () => {
-                        if (!Store.netMgr.online) {
-                            // set that voucher offline sp it goes in a queue
+                        // Network error of some kind;
+                        // Don't clear the voucher list!
+                        if (!this.netMgr.online) {
+                            // set that voucher offline so it goes in the queue
                             this.vouchers[
                                 this.vouchers.length - 1
                             ].online = false;
@@ -154,7 +152,6 @@ export default {
                 );
             }
         },
-
         /**
          * When the deleting an empty voucherCode,
          *  select the text in the other box
@@ -251,7 +248,7 @@ export default {
             // Try to cross-platform catch the keycode
             // Note, there's also "event.which" (int)
             // There's also "event.key" (string), which MDN thinks is better;
-            const charCode = event.keyCode ? event.keyCode : event.charCode;
+            const charCode = event.keyCode ?? event.charCode;
             return String.fromCharCode(charCode);
         },
         delay: function (callback, ms) {
