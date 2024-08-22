@@ -5,19 +5,33 @@
         :disabled="state !== ''"
         @click="onClick"
     >
-        <span v-if="state === ''" class=""><slot /></span>
-        <span v-if="state === 'spinner'" class="">Please wait...</span>
+        <span v-if="state === ''"><slot /></span>
+        <span v-if="state === 'fail'"><font-awesome-icon icon="fa-solid fa-times" size="2x" beat-fade /></span>
+        <span v-if="state === 'validate'"><font-awesome-icon icon="fa-solid fa-check" size="2x" beat-fade /></span>
+        <span v-if="state === 'queued'"><font-awesome-icon icon="fa-solid fa-clock" size="2x" /></span>
+        <span v-if="state === 'spinner'">
+            <font-awesome-icon icon="fa-solid fa-spinner" size="xl" spin class="spaced"/><span>Please wait...</span>
+        </span>
     </button>
 </template>
 
 <script>
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faTimes, faCheck, faClock, faSpinner } from '@fortawesome/free-solid-svg-icons';
 export default {
     name: "async-button",
     props: {
         onClick: { type: Function, required: true },
         state: String,
     },
-    data: () => {
+    components: {
+        FontAwesomeIcon
+    },
+    created() {
+        library.add(...[faTimes, faCheck, faClock, faSpinner]);
+    },
+    data: function() {
         return {};
     },
     computed: {},
@@ -33,40 +47,20 @@ export default {
 .fail,
 .queued {
     color: $arc_white;
-    &:before {
-        font-size: 1.5em;
-        font-family: FontAwesome, serif;
-    }
 }
 .spinner {
-    position: relative;
     background: $arc_rose;
-    &:before {
-        position: absolute;
-        animation: fa-spin 2s infinite linear;
-        top: 11px;
-        left: 6em;
-        right: 0;
-        margin: 0 auto;
-        content: "\f013";
-    }
 }
 .validate {
     background: $arc_success;
-    &:before {
-        content: "\f00c";
-    }
 }
 .fail {
     background: $arc_error;
-    &:before {
-        content: "\f00d";
-    }
 }
 .queued {
     background: $arc_warning;
-    &:before {
-        content: "\f017";
-    }
+}
+.spaced {
+    margin-right: 0.5rem;
 }
 </style>

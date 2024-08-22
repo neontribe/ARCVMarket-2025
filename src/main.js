@@ -16,7 +16,6 @@ console.info(
     VERSION
 );
 console.log('Package Version', pjson.version);
-
 const app = createApp(App);
 
 app.config.globalProperties.$store = Store;
