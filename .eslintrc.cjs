@@ -1,5 +1,5 @@
 /* eslint-env node */
-require('@rushstack/eslint-patch/modern-module-resolution')
+require('@rushstack/eslint-patch/modern-module-resolution');
 
 module.exports = {
   root: true,
@@ -9,6 +9,9 @@ module.exports = {
     '@vue/eslint-config-typescript',
     '@vue/eslint-config-prettier/skip-formatting'
   ],
+  'rules': {
+    'semi' : 2,
+  },
   overrides: [
       {
       files: [
@@ -23,4 +26,4 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest'
   }
-}
+};

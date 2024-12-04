@@ -64,7 +64,7 @@ const base =
     // Chop the last one off, there may only be one
     .slice(0, -1)
     // Rejoin the remainder (if any) and tap "/" on the back.
-    .join('/') + '/'
+    .join('/') + '/';
 
 const router = createRouter({
   routes,
