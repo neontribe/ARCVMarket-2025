@@ -6,6 +6,7 @@ import Store from './store';
 import router from './router';
 import constants from './constants';
 import pjson from '../package.json';
+import { createPinia } from 'pinia';
 
 console.info(
     'Build date: ' +
@@ -16,7 +17,9 @@ console.info(
         VERSION
 );
 console.log('Package Version', pjson.version);
+
 const app = createApp(App);
+const pinia = createPinia();
 
 app.config.globalProperties.$store = Store;
 app.config.globalProperties.$eventBus = EventBus;
@@ -25,6 +28,7 @@ app.mixin({
         Store.config = Config;
     }
 });
+app.use(pinia);
 app.use(router);
 app.mount('#app');
 
