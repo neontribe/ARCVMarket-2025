@@ -31,12 +31,12 @@
 </template>
 
 <script>
-import Store from "../store.js";
+import Store from '../store.js';
 export default {
-    name: "toolbar",
+    name: 'toolbar',
     data: function () {
         return {
-            recVouchers: Store.trader.recVouchers,
+            recVouchers: Store.trader.recVouchers
         };
     },
     mounted: function () {
@@ -52,12 +52,12 @@ export default {
             return this.recVouchers[0] && this.recVouchers[0].length > 0;
         },
         showIcon: function () {
-            if (Store.trader.hasOwnProperty("featureOverride")) {
+            if (Store.trader.hasOwnProperty('featureOverride')) {
                 const { tap } = Store.trader.featureOverride.pageAccess;
                 return tap;
             }
             return true;
-        },
-    },
+        }
+    }
 };
 </script>

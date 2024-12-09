@@ -215,14 +215,14 @@
 </template>
 
 <script>
-import Store from "../store.js";
-import NetMgr from "../services/netMgr.js";
-import constants from "../constants";
-import SpinnerMix from "../mixins/SpinnerMixin.js";
-import MessageMix from "../mixins/MessageMixin";
+import Store from '../store.js';
+import NetMgr from '../services/netMgr.js';
+import constants from '../constants';
+import SpinnerMix from '../mixins/SpinnerMixin.js';
+import MessageMix from '../mixins/MessageMixin';
 
 export default {
-    name: "account",
+    name: 'account',
     mixins: [MessageMix, SpinnerMix],
     data() {
         return {
@@ -231,7 +231,7 @@ export default {
             errorMessage: Store.error,
             goodFeedback: false,
             selected: true,
-            selectedDate: null,
+            selectedDate: null
         };
     },
     watch: {},
@@ -243,16 +243,16 @@ export default {
         },
         onRequestSubmissionEmail: function () {
             const url =
-                "/traders/" + Store.trader.id + "/voucher-history-email";
+                '/traders/' + Store.trader.id + '/voucher-history-email';
             this.requestEmailBeSent(url, {
-                submission_date: this.selectedDate,
+                submission_date: this.selectedDate
             });
         },
         onRequestVoucherHistoryEmail: function () {
             const url =
-                "/traders/" + Store.trader.id + "/voucher-history-email";
+                '/traders/' + Store.trader.id + '/voucher-history-email';
             this.requestEmailBeSent(url, {
-                submission_date: null,
+                submission_date: null
             });
         },
         requestEmailBeSent: function (url, data) {
@@ -268,31 +268,32 @@ export default {
                     default:
                         this.goodFeedback = false;
                         mailMsg =
-                            "Something went wrong, please try again later.";
+                            'Something went wrong, please try again later.';
                         console.log(response); // because we need to see what the server said somewhere.
                 }
-                const state = this.goodFeedback
-                    ? constants.MESSAGE_SUCCESS
-                    : constants.MESSAGE_ERROR;
+                const state =
+                    this.goodFeedback ?
+                        constants.MESSAGE_SUCCESS
+                    :   constants.MESSAGE_ERROR;
                 this.setMessage(mailMsg, state);
             });
         },
         pgBtnIsDisabled: function (key) {
             const pg = this.voucherPagination || {};
             if (
-                pg.hasOwnProperty("first") &&
-                pg.hasOwnProperty("last") &&
-                pg.hasOwnProperty("current")
+                pg.hasOwnProperty('first') &&
+                pg.hasOwnProperty('last') &&
+                pg.hasOwnProperty('current')
             ) {
                 // check first and last aren't the same page
                 if (pg.first.page !== pg.last.page) {
                     switch (key) {
-                        case "first":
+                        case 'first':
                             return pg[key].page === pg.current.page;
-                        case "last":
+                        case 'last':
                             return pg[key].page === pg.current.page;
                         default:
-                            return pg[key].url === "";
+                            return pg[key].url === '';
                     }
                 }
             }
@@ -301,9 +302,9 @@ export default {
         },
         pageOfPages: function () {
             const pg = this.voucherPagination || {};
-            return pg.hasOwnProperty("current")
-                ? pg["current"].page + " of " + pg["last"].page
-                : "";
+            return pg.hasOwnProperty('current') ?
+                    pg['current'].page + ' of ' + pg['last'].page
+                :   '';
         },
         pgChangePage: async function (event) {
             this.showSpinner();
@@ -312,7 +313,7 @@ export default {
             const page = pg.hasOwnProperty(key) ? pg[key].page : 1;
             await Store.getVoucherPaymentState(page);
             this.hideSpinner();
-        },
+        }
     },
     mounted: async function () {
         this.showSpinner();
@@ -324,6 +325,6 @@ export default {
             this.$router.message = {};
         }
         this.hideSpinner();
-    },
+    }
 };
 </script>

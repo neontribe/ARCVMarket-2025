@@ -54,16 +54,16 @@
 </template>
 
 <script>
-import Store from "../store.js";
+import Store from '../store.js';
 
-import constants from "../constants";
-import MessageMixin from "../mixins/MessageMixin";
-import AsyncButtonMixin from "../mixins/AsyncButtonMixin";
+import constants from '../constants';
+import MessageMixin from '../mixins/MessageMixin';
+import AsyncButtonMixin from '../mixins/AsyncButtonMixin';
 
 const RESULT_TIMER = 3000;
 
 export default {
-    name: "queue",
+    name: 'queue',
     mixins: [MessageMixin, AsyncButtonMixin],
     data: function () {
         return {
@@ -71,7 +71,7 @@ export default {
             collapsed: true,
             show: true,
             netMgr: Store.netMgr,
-            vouchers: Store.trader.vouchers,
+            vouchers: Store.trader.vouchers
         };
     },
     created: function () {
@@ -85,17 +85,17 @@ export default {
                 const queueState = val.sendingStatus;
                 if (!queueState && val.sentData) {
                     const message = val.sentData.data.message;
-                    this.updateOp("validate", RESULT_TIMER);
+                    this.updateOp('validate', RESULT_TIMER);
                     this.emitMessage(message, constants.MESSAGE_SUCCESS);
                 } else if (!queueState) {
-                    this.state = "";
+                    this.state = '';
                 }
             },
-            deep: true,
+            deep: true
         },
         vouchers: function () {
             this.setMessage(this.queueStatus, constants.MESSAGE_STATUS);
-        },
+        }
     },
     mounted: function () {
         if (this.queue.sendingStatus) {
@@ -109,29 +109,29 @@ export default {
             );
         },
         queueStatus: function () {
-            const pluralise = this.vouchers.length !== 1 ? "s" : "";
+            const pluralise = this.vouchers.length !== 1 ? 's' : '';
             return (
-                "You have <strong>" +
+                'You have <strong>' +
                 this.vouchers.length +
-                "</strong> voucher" +
+                '</strong> voucher' +
                 pluralise +
-                " not added. Press here to add."
+                ' not added. Press here to add.'
             );
-        },
+        }
     },
     methods: {
         onSubmitQueue: function () {
             this.startSpinner();
 
             Store.transitionVouchers(
-                "collect",
+                'collect',
                 Store.getTraderVoucherList(),
                 (response) => {
                     // The server has processed our list, clear it.
                     Store.clearVouchers();
                     Store.getRecVouchers();
 
-                    let message = "";
+                    let message = '';
                     let messageType = constants.MESSAGE_SUCCESS;
 
                     // We need to check warning because a queue can contain just one voucher.
@@ -141,18 +141,18 @@ export default {
                     } else if (response.data.message) {
                         message = response.data.message;
                     }
-                    this.updateOp("validate", RESULT_TIMER);
+                    this.updateOp('validate', RESULT_TIMER);
                     this.emitMessage(message, messageType);
                 },
                 () => {
-                    this.updateOp("fail", RESULT_TIMER);
+                    this.updateOp('fail', RESULT_TIMER);
                     this.emitMessage(
                         constants.copy.QUEUE_NETWORK_ERROR,
                         constants.MESSAGE_ERROR
                     );
                 }
             );
-        },
-    },
+        }
+    }
 };
 </script>

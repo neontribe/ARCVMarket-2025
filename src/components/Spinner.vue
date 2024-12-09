@@ -12,14 +12,14 @@
 
 <script>
 export default {
-    name: "Spinner",
+    name: 'Spinner',
     props: {
         active: Boolean,
-        text: String,
+        text: String
     },
     data: function () {
         return {};
-    },
+    }
 };
 </script>
 

@@ -1,12 +1,12 @@
-import NetMgr from "./services/netMgr.js";
-import constants from "./constants";
-import { parseLinkHeader } from "@web3-storage/parse-link-header";
+import NetMgr from './services/netMgr.js';
+import constants from './constants';
+import { parseLinkHeader } from '@web3-storage/parse-link-header';
 
 // TODO store.error needs store based setter.
 let store = {
     user: {
         id: 1,
-        traders: [],
+        traders: []
     },
     trader: {
         id: null,
@@ -14,19 +14,19 @@ let store = {
         vouchers: [],
         recVouchers: [],
         market: {
-            payment_message: "",
-            sponsor_shortcode: "",
-        },
+            payment_message: '',
+            sponsor_shortcode: ''
+        }
     },
     netMgr: NetMgr,
     auth: false,
     error: null,
     queue: {
         sendingStatus: false,
-        sentData: null,
+        sentData: null
     },
     gettingRecVouchers: 0,
-    pendedVoucherPagination: {},
+    pendedVoucherPagination: {}
 };
 
 /**
@@ -36,7 +36,7 @@ store.resetStore = function () {
     // Wipe the current user
     this.user = {
         id: null,
-        traders: [],
+        traders: []
     };
     // Wipe the current trader details
     this.trader = {
@@ -45,9 +45,9 @@ store.resetStore = function () {
         vouchers: [],
         recVouchers: [],
         market: {
-            payment_message: "",
-            sponsor_shortcode: "",
-        },
+            payment_message: '',
+            sponsor_shortcode: ''
+        }
     };
     // Init the vouchers
     this.trader.vouchers = this.trader.vouchers.splice(
@@ -96,7 +96,7 @@ store.getVouchersOnlineStatus = function () {
  */
 store.authenticate = function (userApiCredentials, success, failure) {
     this.netMgr.apiPost(
-        "/login",
+        '/login',
         userApiCredentials,
         function (response) {
             this.netMgr.setToken(response.data);
@@ -127,7 +127,7 @@ store.authenticate = function (userApiCredentials, success, failure) {
 store.unAuthenticate = function (success, failure) {
     // Hit the logout endpoint.
     this.netMgr.apiPost(
-        "/logout",
+        '/logout',
         null,
         (response) => {
             if (success) {
@@ -149,7 +149,7 @@ store.unAuthenticate = function (success, failure) {
  * Updates the current User's Traders
  */
 store.getUserTraders = function () {
-    this.netMgr.apiGet("/traders", (response) => {
+    this.netMgr.apiGet('/traders', (response) => {
         this.user.traders.splice(0, this.user.traders.length, response.data);
     });
 };
@@ -178,8 +178,8 @@ store.setUserTrader = function (id) {
  * @param {boolean} [submitVouchers=true]
  */
 store.setUserTradersFromLocalStorage = function (submitVouchers = true) {
-    let user = localStorage["Store.user"];
-    let trader = localStorage["Store.trader"];
+    let user = localStorage['Store.user'];
+    let trader = localStorage['Store.trader'];
 
     let parsedUser = this.user;
     let parsedTrader = this.trader;
@@ -188,7 +188,7 @@ store.setUserTradersFromLocalStorage = function (submitVouchers = true) {
         parsedUser = JSON.parse(user);
         parsedTrader = JSON.parse(trader);
     } catch (e) {
-        console.error("Invalid token stored in localstorage.");
+        console.error('Invalid token stored in localstorage.');
     }
 
     this.user = parsedUser;
@@ -201,7 +201,7 @@ store.setUserTradersFromLocalStorage = function (submitVouchers = true) {
     ) {
         this.queue.sendingStatus = true;
         this.transitionVouchers(
-            "collect",
+            'collect',
             this.getTraderVoucherList(),
             (response) => {
                 // The server has processed our list, clear it.
@@ -222,8 +222,8 @@ store.setUserTradersFromLocalStorage = function (submitVouchers = true) {
  * Manages all localStorage settings for the store object.
  */
 store.setLocalStorageFromUserTraders = function () {
-    localStorage["Store.user"] = JSON.stringify(this.user);
-    localStorage["Store.trader"] = JSON.stringify(this.trader);
+    localStorage['Store.user'] = JSON.stringify(this.user);
+    localStorage['Store.trader'] = JSON.stringify(this.trader);
 };
 
 /**
@@ -235,7 +235,7 @@ store.getVoucherPaymentState = async function (pageNum = 1) {
         `traders/${this.trader.id}/voucher-history?page=${pageNum}`,
         (response) => {
             // update the voucherPagination tracker
-            let links = parseLinkHeader(response.headers["links"]) || {};
+            let links = parseLinkHeader(response.headers['links']) || {};
             this.pendedVoucherPagination = Object.assign(
                 this.pendedVoucherPagination,
                 links
@@ -246,7 +246,7 @@ store.getVoucherPaymentState = async function (pageNum = 1) {
             );
         },
         (error) => {
-            console.log("apiGet returned an error:", error);
+            console.log('apiGet returned an error:', error);
         }
     );
 };
@@ -306,7 +306,7 @@ store.addVoucherCode = function (voucherCode, success, failure) {
     // Add a voucher to the list
     this.trader.vouchers.push({
         code: voucherCode,
-        online: this.netMgr.online,
+        online: this.netMgr.online
     });
 
     // Store the whole trader
@@ -314,7 +314,7 @@ store.addVoucherCode = function (voucherCode, success, failure) {
 
     // Post it to the backend
     this.transitionVouchers(
-        "collect",
+        'collect',
         this.getTraderVoucherList(),
         success,
         failure
@@ -329,7 +329,7 @@ store.addVoucherCode = function (voucherCode, success, failure) {
  */
 store.delVoucher = function (voucherCode, success, failure) {
     // POST to the server
-    this.transitionVouchers("reject", [voucherCode], success, failure);
+    this.transitionVouchers('reject', [voucherCode], success, failure);
 };
 
 /**
@@ -343,7 +343,7 @@ store.pendRecVouchers = function (success, failure) {
         return voucher.code;
     });
     // Execute the transition using the queue.
-    this.transitionVouchers("confirm", voucherCodes, success, failure, true);
+    this.transitionVouchers('confirm', voucherCodes, success, failure, true);
 };
 
 /**
@@ -369,19 +369,19 @@ store.transitionVouchers = function (
     vouchers,
     // set some default functions
     success = () => {
-        console.log("default success handler called");
+        console.log('default success handler called');
     },
     failure = () => {
-        console.log("default failure handler called");
+        console.log('default failure handler called');
     },
     queueAsync = false
 ) {
     const postData = {
         transition: transition,
         trader_id: this.trader.id,
-        vouchers: vouchers,
+        vouchers: vouchers
     };
-    const url = queueAsync ? "vouchers/transitions" : "vouchers";
+    const url = queueAsync ? 'vouchers/transitions' : 'vouchers';
     return this.netMgr.apiPost(
         url,
         postData,

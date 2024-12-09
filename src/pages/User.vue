@@ -44,13 +44,13 @@
 </template>
 
 <script>
-import Store from "../store.js";
+import Store from '../store.js';
 export default {
-    name: "user",
+    name: 'user',
     data() {
         return {
             userTraders: Store.user.traders,
-            checked: [], // Is at least one radio button clicked.
+            checked: [] // Is at least one radio button clicked.
         };
     },
     watch: {
@@ -59,18 +59,18 @@ export default {
                 Store.setUserTrader(traders[0][0].id);
                 this.redirect();
             }
-        },
+        }
     },
     computed: {
         traderList: function () {
-            console.log("computed");
+            console.log('computed');
             return this.userTraders[0]?.length > 1 || false;
-        },
+        }
     },
     mounted: function () {
         Store.getUserTraders();
         console.log(this.userTraders);
-        console.log("mounted");
+        console.log('mounted');
     },
     methods: {
         onContinue: function () {
@@ -79,9 +79,9 @@ export default {
             }
         },
         redirect: function () {
-            const redirect = this.$route.query?.redirect || "/";
+            const redirect = this.$route.query?.redirect || '/';
             this.$router.push({ path: redirect });
-        },
-    },
+        }
+    }
 };
 </script>

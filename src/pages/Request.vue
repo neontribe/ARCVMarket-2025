@@ -37,17 +37,17 @@
 </template>
 
 <script>
-import Store from "../store.js";
-import mixin from "../mixins/mixins";
-import constants from "../constants";
+import Store from '../store.js';
+import mixin from '../mixins/mixins';
+import constants from '../constants';
 
 export default {
-    name: "request",
+    name: 'request',
     mixins: [mixin.messages],
     data: function () {
         return {
             username: null,
-            netMgr: Store.netMgr,
+            netMgr: Store.netMgr
         };
     },
     methods: {
@@ -60,7 +60,7 @@ export default {
         onRequestResetEmail: function () {
             if (this.isEmailValid(this.username)) {
                 return this.netMgr.apiPost(
-                    "user/lost_password",
+                    'user/lost_password',
                     { email: this.username },
 
                     function (response) {
@@ -79,11 +79,11 @@ export default {
                 );
             } else {
                 this.setMessage(
-                    "Please enter a valid email address.",
+                    'Please enter a valid email address.',
                     constants.MESSAGE_ERROR
                 );
             }
-        },
-    },
+        }
+    }
 };
 </script>

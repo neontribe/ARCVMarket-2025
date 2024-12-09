@@ -9,11 +9,11 @@
 
 <script>
 export default {
-    name: "privacy-link",
+    name: 'privacy-link',
     computed: {
         year() {
             return new Date().getFullYear();
-        },
-    },
+        }
+    }
 };
 </script>

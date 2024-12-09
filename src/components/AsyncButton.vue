@@ -6,11 +6,22 @@
         @click="onClick"
     >
         <span v-if="state === ''"><slot /></span>
-        <span v-if="state === 'fail'"><font-awesome-icon icon="fa-solid fa-times" size="2x" beat-fade /></span>
-        <span v-if="state === 'validate'"><font-awesome-icon icon="fa-solid fa-check" size="2x" beat-fade /></span>
-        <span v-if="state === 'queued'"><font-awesome-icon icon="fa-solid fa-clock" size="2x" /></span>
+        <span v-if="state === 'fail'"
+            ><font-awesome-icon icon="fa-solid fa-times" size="2x" beat-fade
+        /></span>
+        <span v-if="state === 'validate'"
+            ><font-awesome-icon icon="fa-solid fa-check" size="2x" beat-fade
+        /></span>
+        <span v-if="state === 'queued'"
+            ><font-awesome-icon icon="fa-solid fa-clock" size="2x"
+        /></span>
         <span v-if="state === 'spinner'">
-            <font-awesome-icon icon="fa-solid fa-spinner" size="xl" spin class="spaced"/><span>Please wait...</span>
+            <font-awesome-icon
+                icon="fa-solid fa-spinner"
+                size="xl"
+                spin
+                class="spaced"
+            /><span>Please wait...</span>
         </span>
     </button>
 </template>
@@ -18,12 +29,17 @@
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faTimes, faCheck, faClock, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import {
+    faTimes,
+    faCheck,
+    faClock,
+    faSpinner
+} from '@fortawesome/free-solid-svg-icons';
 export default {
-    name: "async-button",
+    name: 'async-button',
     props: {
         onClick: { type: Function, required: true },
-        state: String,
+        state: String
     },
     components: {
         FontAwesomeIcon
@@ -31,17 +47,17 @@ export default {
     created() {
         library.add(...[faTimes, faCheck, faClock, faSpinner]);
     },
-    data: function() {
+    data: function () {
         return {};
     },
     computed: {},
     watch: {},
-    methods: {},
+    methods: {}
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../sass/vars";
+@import '../sass/vars';
 .spinner,
 .validate,
 .fail,

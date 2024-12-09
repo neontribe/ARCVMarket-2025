@@ -11,24 +11,24 @@
 </template>
 
 <script>
-import Masthead from "./components/Masthead.vue";
-import PrivacyLink from "./components/PrivacyLink.vue";
+import Masthead from './components/Masthead.vue';
+import PrivacyLink from './components/PrivacyLink.vue';
 
 export default {
-    name: "app",
+    name: 'app',
     components: {
         Masthead,
-        PrivacyLink,
+        PrivacyLink
     },
     computed: {
         footerShow: function () {
-            const paths = ["/", "/scan", "/payment", "/account"];
-            return paths.indexOf(this.$route.path) !== - 1;
-        },
-    },
+            const paths = ['/', '/scan', '/payment', '/account'];
+            return paths.indexOf(this.$route.path) !== -1;
+        }
+    }
 };
 </script>
 
 <style lang="scss">
-@import "./sass/app.scss";
+@import './sass/app.scss';
 </style>

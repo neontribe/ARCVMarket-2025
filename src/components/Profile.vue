@@ -11,40 +11,40 @@
 </template>
 
 <script>
-import Store from "../store.js";
-import constants from "../constants";
+import Store from '../store.js';
+import constants from '../constants';
 export default {
-    name: "profile",
+    name: 'profile',
     data: function () {
         return {
             selectedTrader: Store.trader,
-            userTraders: Store.user.traders,
+            userTraders: Store.user.traders
         };
     },
     computed: {
         changeTrader: function () {
             return this.userTraders[0] && this.userTraders[0].length > 1;
-        },
+        }
     },
     methods: {
         onLogout: function () {
             Store.unAuthenticate();
             const routeObj = {
-                name: "login",
+                name: 'login',
                 params: {
                     passedMessage: {
                         text: constants.copy.USER_LOGOUT,
-                        state: constants.MESSAGE_SUCCESS,
-                    },
-                },
+                        state: constants.MESSAGE_SUCCESS
+                    }
+                }
             };
             this.$router.push(routeObj);
-        },
+        }
     },
     mounted: function () {
         if (Store.auth) {
             Store.getUserTraders();
         }
-    },
+    }
 };
 </script>

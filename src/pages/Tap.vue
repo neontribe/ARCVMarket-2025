@@ -59,27 +59,27 @@
 </template>
 
 <script>
-import Store from "../store.js";
-import Queue from "../components/Queue.vue";
-import constants from "../constants.js";
-import AsyncButtonMixin from "../mixins/AsyncButtonMixin";
-import MessageMixin from "../mixins/MessageMixin";
+import Store from '../store.js';
+import Queue from '../components/Queue.vue';
+import constants from '../constants.js';
+import AsyncButtonMixin from '../mixins/AsyncButtonMixin';
+import MessageMixin from '../mixins/MessageMixin';
 
 const RESULT_TIMER = 1000;
 
 export default {
-    name: "tap",
+    name: 'tap',
     mixins: [MessageMixin, AsyncButtonMixin],
     components: {
-        Queue,
+        Queue
     },
     data: function () {
         return {
             sponsorCode: Store.trader.market.sponsor_shortcode,
-            voucherCode: "",
+            voucherCode: '',
             vouchers: Store.trader.vouchers,
             recVouchers: Store.trader.recVouchers,
-            netMgr: Store.netMgr,
+            netMgr: Store.netMgr
         };
     },
     methods: {
@@ -93,20 +93,20 @@ export default {
                     (response) => {
                         const responseData = response.data;
                         if (responseData.error) {
-                            this.updateOp("fail", RESULT_TIMER);
+                            this.updateOp('fail', RESULT_TIMER);
                             this.setMessage(
                                 responseData.error,
                                 constants.MESSAGE_ERROR
                             );
                         } else if (responseData.warning) {
-                            this.updateOp("fail", RESULT_TIMER);
+                            this.updateOp('fail', RESULT_TIMER);
                             this.setMessage(
                                 responseData.warning,
                                 constants.MESSAGE_WARNING
                             );
                         } else {
                             // all in!
-                            this.updateOp("validate", RESULT_TIMER);
+                            this.updateOp('validate', RESULT_TIMER);
                             this.message = {};
                             // We're intentionally not setting to responseData.message here.
                         }
@@ -120,10 +120,9 @@ export default {
                         // Don't clear the voucher list!
                         if (!this.netMgr.online) {
                             // set that voucher offline so it goes in the queue
-                            this.vouchers[
-                                this.vouchers.length - 1
-                            ].online = false;
-                            this.updateOp("queued", RESULT_TIMER);
+                            this.vouchers[this.vouchers.length - 1].online =
+                                false;
+                            this.updateOp('queued', RESULT_TIMER);
                             this.setMessage(
                                 constants.copy.VOUCHER_LOST_SIGNAL,
                                 constants.MESSAGE_WARNING
@@ -132,9 +131,9 @@ export default {
                     }
                 );
                 // Do anyway.
-                this.voucherCode = "";
+                this.voucherCode = '';
             } else {
-                this.updateOp("fail", RESULT_TIMER);
+                this.updateOp('fail', RESULT_TIMER);
                 this.setMessage(
                     constants.copy.VOUCHER_SUBMIT_INVALID,
                     constants.MESSAGE_ERROR
@@ -167,7 +166,7 @@ export default {
 
             if (
                 this.sponsorCode.length <
-                this.$refs.sponsorBox.getAttribute("maxlength")
+                this.$refs.sponsorBox.getAttribute('maxlength')
             ) {
                 if (char.match(rxCaps)) {
                     event.preventDefault();
@@ -183,7 +182,7 @@ export default {
                 event.preventDefault();
                 if (
                     this.voucherCode.length <
-                    this.$refs.voucherBox.getAttribute("maxlength")
+                    this.$refs.voucherBox.getAttribute('maxlength')
                 ) {
                     this.$refs.voucherBox.focus();
                     this.voucherCode += char;
@@ -195,7 +194,7 @@ export default {
                 event.preventDefault();
                 if (
                     this.voucherCode.length <
-                    this.$refs.voucherBox.getAttribute("maxlength")
+                    this.$refs.voucherBox.getAttribute('maxlength')
                 ) {
                     this.$refs.voucherBox.focus();
                 }
@@ -215,7 +214,7 @@ export default {
                     return;
                 }
                 //allow enter key to submit
-                if (event.key === "Enter") {
+                if (event.key === 'Enter') {
                     this.onRecordVoucher();
                 }
                 event.preventDefault();
@@ -228,10 +227,10 @@ export default {
             // There's also "event.key" (string), which MDN thinks is better;
             const charCode = event.keyCode ?? event.charCode;
             return String.fromCharCode(charCode);
-        },
+        }
     },
     mounted: function () {
         Store.maybeGetRecVouchers();
-    },
+    }
 };
 </script>

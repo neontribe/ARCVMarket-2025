@@ -61,14 +61,14 @@
 </template>
 
 <script>
-import Config from "../config.js";
-import Store from "../store.js";
-import mixin from "../mixins/mixins";
-import constants from "../constants";
+import Config from '../config.js';
+import Store from '../store.js';
+import mixin from '../mixins/mixins';
+import constants from '../constants';
 
 export default {
-    name: "login",
-    props: ["passedMessage"],
+    name: 'login',
+    props: ['passedMessage'],
     mixins: [mixin.messages],
     data: function () {
         return {
@@ -77,7 +77,7 @@ export default {
             remember: true,
             commitMsg: VERSION,
             appV: Config.appVersion,
-            env: Config.env,
+            env: Config.env
         };
     },
     mounted: function () {
@@ -92,7 +92,7 @@ export default {
         onLogin: function () {
             const userApiCredentials = {
                 username: this.username,
-                password: this.password,
+                password: this.password
             };
 
             Store.authenticate(
@@ -102,7 +102,7 @@ export default {
                     // I don't like this here, but it's the only place it works for now.
                     let redirect = this.$route.query.redirect;
                     if (!redirect) {
-                        redirect = "/scan";
+                        redirect = '/scan';
                     }
                     this.$router.push({ path: redirect });
                 }.bind(this),
@@ -111,7 +111,7 @@ export default {
                     this.setMessage(errMsg, constants.MESSAGE_ERROR);
                 }.bind(this)
             );
-        },
-    },
+        }
+    }
 };
 </script>

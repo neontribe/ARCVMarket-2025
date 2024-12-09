@@ -1,10 +1,10 @@
-import Config from "../config.js";
-import Fixtures from "../../fixtures/fixtures.js";
-import Axios from "axios";
-import { axiosETAGCache } from "axios-etag-cache";
-import MockAdapter from "axios-mock-adapter";
-import EventBus from "./events";
-import Store from "../store";
+import Config from '../config.js';
+import Fixtures from '../../fixtures/fixtures.js';
+import Axios from 'axios';
+import { axiosETAGCache } from 'axios-etag-cache';
+import MockAdapter from 'axios-mock-adapter';
+import EventBus from './events';
+import Store from '../store';
 
 const NetMgrFactory = function (config) {
     return {
@@ -36,8 +36,8 @@ const NetMgrFactory = function (config) {
 
             if (this.token) {
                 this.token.requestTime = Math.floor(Date.now() / 1000);
-                this.axiosInstance.defaults.headers.common["Authorization"] =
-                    "Bearer " + this.token.access_token;
+                this.axiosInstance.defaults.headers.common['Authorization'] =
+                    'Bearer ' + this.token.access_token;
 
                 this.setLocalStorageFromToken(this.token);
             }
@@ -47,7 +47,7 @@ const NetMgrFactory = function (config) {
          * @param format
          */
         setAccept: function (format) {
-            this.axiosInstance.defaults.headers.common["Accept"] = format;
+            this.axiosInstance.defaults.headers.common['Accept'] = format;
         },
         /**
          * AXIOS get wrapper
@@ -58,7 +58,7 @@ const NetMgrFactory = function (config) {
          */
         apiGet: function (route, cb, err) {
             if (!route.match(/^\//)) {
-                route = "/" + route;
+                route = '/' + route;
             }
             this.axiosInstance
                 .get(route)
@@ -76,7 +76,7 @@ const NetMgrFactory = function (config) {
          */
         apiPost: function (route, postData, cb, err) {
             if (!route.match(/^\//)) {
-                route = "/" + route;
+                route = '/' + route;
             }
             this.axiosInstance
                 .post(route, postData)
@@ -152,13 +152,13 @@ const NetMgrFactory = function (config) {
          * @returns {Object|null}
          */
         getTokenFromLocalStorage: function () {
-            const localToken = localStorage["NetMgr.token"];
+            const localToken = localStorage['NetMgr.token'];
             let parsedLocalToken = null;
 
             try {
                 parsedLocalToken = JSON.parse(localToken);
             } catch (e) {
-                console.error("Invalid token stored in localstorage.");
+                console.error('Invalid token stored in localstorage.');
             }
 
             return parsedLocalToken;
@@ -171,8 +171,8 @@ const NetMgrFactory = function (config) {
          *   The token to store in localStorage.
          */
         setLocalStorageFromToken: function (token) {
-            localStorage["NetMgr.token"] = JSON.stringify(token);
-        },
+            localStorage['NetMgr.token'] = JSON.stringify(token);
+        }
     };
 };
 
@@ -181,9 +181,9 @@ let NetMgr = NetMgrFactory({
     timeout: 20000,
     headers: {
         common: {
-            "X-Requested-With": "XMLHttpRequest", // for laravel
-        },
-    },
+            'X-Requested-With': 'XMLHttpRequest' // for laravel
+        }
+    }
 });
 
 /**
@@ -199,7 +199,7 @@ NetMgr.setOnlineStatus = function (onlineStatus = true) {
     const diff = onlineStatus !== this.online;
     if (diff) {
         this.online = onlineStatus;
-        EventBus.emit("NetMgr.onlineStatusChange", this.online);
+        EventBus.emit('NetMgr.onlineStatusChange', this.online);
     }
 };
 
@@ -210,52 +210,52 @@ NetMgr.axiosInstance.interceptors.response.use(
 );
 
 function stash(response) {
-    if (Config.env !== "production" && Config.env !== "test") {
+    if (Config.env !== 'production' && Config.env !== 'test') {
         // don't bother logging in we aren't live
         return;
     }
     response.created = Date.now();
     response.trader = Store.trader.id;
-    const data = localStorage.getItem("arcLogs");
+    const data = localStorage.getItem('arcLogs');
     const logs = data ? JSON.parse(data) : {};
     const json = JSON.stringify(response);
     const encoder = new TextEncoder();
     const plainText = encoder.encode(json);
-    crypto.subtle.digest("SHA-256", plainText).then((hash) => {
+    crypto.subtle.digest('SHA-256', plainText).then((hash) => {
         logs[
             Array.prototype.map
                 .call(new Uint8Array(hash), (x) =>
-                    ("00" + x.toString(16)).slice(-2)
+                    ('00' + x.toString(16)).slice(-2)
                 )
-                .join("")
+                .join('')
         ] = response;
-        localStorage.setItem("arcLogs", JSON.stringify(logs));
+        localStorage.setItem('arcLogs', JSON.stringify(logs));
 
         // We don't care if the logs send this time as they will be sent next time if they fail
         try {
-            const token = JSON.parse(localStorage["NetMgr.token"]);
+            const token = JSON.parse(localStorage['NetMgr.token']);
             // we're going to use fetch here to bypass thew axios handlers that trigger this function
-            fetch(Config.apiBase + "/log", {
+            fetch(Config.apiBase + '/log', {
                 body: JSON.stringify(logs),
-                method: "PUT",
+                method: 'PUT',
                 headers: {
-                    accept: "application/json, text/plain, */*",
-                    "accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
-                    "x-requested-with": "XMLHttpRequest",
-                    "Referrer-Policy": "strict-origin-when-cross-origin",
-                    authorization: "Bearer " + token.access_token,
-                },
+                    accept: 'application/json, text/plain, */*',
+                    'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
+                    'x-requested-with': 'XMLHttpRequest',
+                    'Referrer-Policy': 'strict-origin-when-cross-origin',
+                    authorization: 'Bearer ' + token.access_token
+                }
             }).then((r) => {
                 if (r.status === 200) {
                     r.json().then((json) => {
                         // TODO: abstract this, it's used above in this function too
-                        const data = localStorage.getItem("arcLogs");
+                        const data = localStorage.getItem('arcLogs');
                         const logs = data ? JSON.parse(data) : {};
                         let val;
                         for (val of json) {
                             delete logs[val];
                         }
-                        localStorage.setItem("arcLogs", JSON.stringify(logs));
+                        localStorage.setItem('arcLogs', JSON.stringify(logs));
                     });
                 }
             });
@@ -280,19 +280,19 @@ async function responseSuccessInterceptor(origResponse) {
         // everything fine! return the response as-is
         return origResponse;
     } else {
-        console.log("original response", origResponse);
+        console.log('original response', origResponse);
         // there should be a location header and a retry-after
-        const monitorUrl = origResponse.data["location"];
-        const retryAfter = origResponse.data["retry-after"];
+        const monitorUrl = origResponse.data['location'];
+        const retryAfter = origResponse.data['retry-after'];
         // setup a special polling config
         const pollConfig = {
             baseURL: null, // we're going wherever the backend says.
             timeout: retryAfter * 5000, // in case of problems
             headers: {
                 common: {
-                    "X-Requested-With": "XMLHttpRequest", // for laravel
-                },
-            },
+                    'X-Requested-With': 'XMLHttpRequest' // for laravel
+                }
+            }
         };
         // make an axios instance with it
         const pollMgr = NetMgrFactory(pollConfig);
@@ -304,11 +304,11 @@ async function responseSuccessInterceptor(origResponse) {
             responseErrorInterceptor
         );
         let pollingResponse = await pollMgr.axiosInstance.get(monitorUrl);
-        console.log("first...", pollingResponse);
+        console.log('first...', pollingResponse);
         while (
             // if it says we're not finished/failed
-            (pollingResponse.data.status !== "finished" ||
-                pollingResponse.data.status !== "failed") &&
+            (pollingResponse.data.status !== 'finished' ||
+                pollingResponse.data.status !== 'failed') &&
             // ... and we're being told to keep hitting the monitor
             pollingResponse.data.location === monitorUrl
         ) {
@@ -317,22 +317,22 @@ async function responseSuccessInterceptor(origResponse) {
                 setTimeout(resolve, retryAfter * 1000);
             });
             pollingResponse = await pollMgr.axiosInstance.get(monitorUrl);
-            console.log("Operation status", pollingResponse);
+            console.log('Operation status', pollingResponse);
         }
 
         const { status } = pollingResponse.data;
         switch (status) {
-            case "failed":
+            case 'failed':
                 // TODO: set promise rejected.
-                console.log("failed");
+                console.log('failed');
                 return pollingResponse;
-            case "finished":
-                console.log("Operation succeeded, fetching!");
+            case 'finished':
+                console.log('Operation succeeded, fetching!');
                 return await pollMgr.axiosInstance.get(
                     pollingResponse.data.location
                 );
             default:
-                console.log("Operation halted unusually");
+                console.log('Operation halted unusually');
                 return pollingResponse;
         }
     }
@@ -356,19 +356,19 @@ function responseErrorInterceptor(error) {
 
     // Default to assuming we are online.
     // Set offline if a Network Error occurs.
-    NetMgr.setOnlineStatus(errMsg !== "Network Error");
+    NetMgr.setOnlineStatus(errMsg !== 'Network Error');
 
     // is it a 403? User tried something bad, broadcast a Logout event, someone will deal.
     if (origResp.status === 403) {
         NetMgr.setToken(null);
-        EventBus.emit("NetMgr.logout", 403);
+        EventBus.emit('NetMgr.logout', 403);
     }
 
     // Is it a 401 we have not seen before? (and do we have an old token set)
     if (origResp.status === 401 && !origCfg._retry && NetMgr.token) {
         switch (origResp.data.error) {
-            case "invalid_token": // oAuth2 token invalid.
-            case "Unauthenticated.": // User not logged on.
+            case 'invalid_token': // oAuth2 token invalid.
+            case 'Unauthenticated.': // User not logged on.
                 origCfg._retry = true; // Set so we don't hit this one again.
 
                 const lsToken =
@@ -377,7 +377,7 @@ function responseErrorInterceptor(error) {
                 // Let's hit the refresh with the refresh token
                 // Passport is returning the tokens in "data.original" on this endpoint. Odd.
                 return NetMgr.apiPost(
-                    "/login/refresh",
+                    '/login/refresh',
                     { refresh_token: lsToken.refresh_token },
                     (refreshData) => {
                         const newTokenData = refreshData.data.original || null;
@@ -388,7 +388,7 @@ function responseErrorInterceptor(error) {
                             return NetMgr.axiosInstance(origCfg); // Retry the request that errored out.
                         } else {
                             NetMgr.setToken(null);
-                            EventBus.emit("NetMgr.logout", 401);
+                            EventBus.emit('NetMgr.logout', 401);
                         }
                     },
                     (refreshErr) => {
@@ -409,8 +409,8 @@ function responseErrorInterceptor(error) {
 // document.cookie = "arcv_use_mocks=true;max-age=" + 86400*30;
 if (
     Config.useMocks ||
-    (Config.env === "development" &&
-        document.cookie.indexOf("arcv_use_mocks=true") >= 0)
+    (Config.env === 'development' &&
+        document.cookie.indexOf('arcv_use_mocks=true') >= 0)
 ) {
     NetMgr.mockOn();
 }

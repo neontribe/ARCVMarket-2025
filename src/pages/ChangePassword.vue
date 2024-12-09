@@ -41,46 +41,46 @@
 </template>
 
 <script>
-import Store from "../store.js";
-import mixin from "../mixins/mixins";
-import constants from "../constants";
+import Store from '../store.js';
+import mixin from '../mixins/mixins';
+import constants from '../constants';
 
 export default {
-    name: "changePassword",
+    name: 'changePassword',
     mixins: [mixin.messages],
     data: function () {
         return {
             netMgr: Store.netMgr,
-            pwd: "",
-            pwdConfirm: "",
+            pwd: '',
+            pwdConfirm: '',
             email: this.$route.query.email,
-            token: this.$route.query.token,
+            token: this.$route.query.token
         };
     },
     methods: {
         onRequestChangePassword: function () {
             return this.netMgr.apiPost(
-                "user/lost_password/reset",
+                'user/lost_password/reset',
                 {
                     password: this.pwd,
                     password_confirmation: this.pwdConfirm,
                     email: this.email,
-                    token: this.token,
+                    token: this.token
                 },
                 function () {
                     if (this.netMgr.isAuth()) {
                         // If we are logged in, push to the default route
-                        this.$router.push("/");
+                        this.$router.push('/');
                     } else {
                         // otherwise, push to the login page
                         this.$router.push({
-                            name: "login",
+                            name: 'login',
                             params: {
                                 passedMessage: {
                                     text: constants.copy.PASSWORD_RESET,
-                                    state: constants.MESSAGE_SUCCESS,
-                                },
-                            },
+                                    state: constants.MESSAGE_SUCCESS
+                                }
+                            }
                         });
                     }
                 }.bind(this),
@@ -92,7 +92,7 @@ export default {
                     );
                 }.bind(this)
             );
-        },
-    },
+        }
+    }
 };
 </script>

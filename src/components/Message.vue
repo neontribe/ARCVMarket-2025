@@ -9,14 +9,14 @@
 </template>
 
 <script>
-import constants from "../constants";
+import constants from '../constants';
 
 export default {
-    name: "message",
+    name: 'message',
     props: {
-        text: { default: "" },
+        text: { default: '' },
         state: { default: constants.MESSAGE_STATUS },
-        shown: { default: true },
+        shown: { default: true }
     },
     data: function () {
         return {};
@@ -36,7 +36,7 @@ export default {
         },
         visible: function () {
             return this.shown && this.text;
-        },
-    },
+        }
+    }
 };
 </script>

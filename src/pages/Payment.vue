@@ -99,18 +99,18 @@
 </template>
 
 <script>
-import Store from "../store.js";
-import constants from "../constants";
-import MessageMix from "../mixins/MessageMixin";
-import AsyncButtonMixin from "../mixins/AsyncButtonMixin";
+import Store from '../store.js';
+import constants from '../constants';
+import MessageMix from '../mixins/MessageMixin';
+import AsyncButtonMixin from '../mixins/AsyncButtonMixin';
 
 export default {
-    name: "payment",
+    name: 'payment',
     mixins: [MessageMix, AsyncButtonMixin],
     data: () => ({
         recVouchers: Store.trader.recVouchers,
         netMgr: Store.netMgr,
-        collapsed: true,
+        collapsed: true
     }),
     computed: {
         voucherCount: function () {
@@ -120,10 +120,10 @@ export default {
             return this.recVouchers[0] && this.recVouchers[0].length > 0;
         },
         paymentMessage: function () {
-            return Store.trader.market.payment_message
-                ? Store.trader.market.payment_message
-                : constants.copy.PAYMENT_REQUEST_DEFAULT;
-        },
+            return Store.trader.market.payment_message ?
+                    Store.trader.market.payment_message
+                :   constants.copy.PAYMENT_REQUEST_DEFAULT;
+        }
     },
     methods: {
         onRequestPayment() {
@@ -135,13 +135,13 @@ export default {
                         this.paymentMessage,
                         constants.MESSAGE_SUCCESS
                     );
-                    this.updateOp("validate");
+                    this.updateOp('validate');
                     this.$router.message = this.message;
-                    this.$router.push("/account");
+                    this.$router.push('/account');
                 },
                 // on Failure... hook for an alert?
                 () => {
-                    this.updateOp("fail");
+                    this.updateOp('fail');
                     this.setMessage(
                         constants.copy.PAYMENT_REQUEST_ERROR,
                         constants.MESSAGE_ERROR
@@ -166,11 +166,11 @@ export default {
                     );
                 }
             );
-        },
+        }
     },
     mounted: function () {
         // initialise the current vouchers list;
         Store.maybeGetRecVouchers();
-    },
+    }
 };
 </script>

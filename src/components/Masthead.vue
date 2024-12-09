@@ -4,8 +4,7 @@
             <div
                 class="logo"
                 v-bind:class="{
-                    login:
-                        $route.meta.auth === false || $route.path === '/user',
+                    login: $route.meta.auth === false || $route.path === '/user'
                 }"
             >
                 <router-link
@@ -48,23 +47,23 @@
 </template>
 
 <script>
-import Profile from "../components/Profile.vue";
-import Toolbar from "../components/Toolbar.vue";
+import Profile from '../components/Profile.vue';
+import Toolbar from '../components/Toolbar.vue';
 export default {
-    name: "masthead",
+    name: 'masthead',
     components: {
         Profile,
-        Toolbar,
+        Toolbar
     },
     computed: {
         headerFull: function () {
-            const paths = ["/login", "/user", "/request", "/change-password"];
+            const paths = ['/login', '/user', '/request', '/change-password'];
             return paths.indexOf(this.$route.path) === -1;
         },
         toolbarShow: function () {
-            const paths = ["/", "/scan"];
+            const paths = ['/', '/scan'];
             return paths.indexOf(this.$route.path) !== -1;
-        },
-    },
+        }
+    }
 };
 </script>
