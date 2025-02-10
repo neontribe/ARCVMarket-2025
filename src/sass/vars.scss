@@ -1,4 +1,4 @@
-/* Copyright (c) 2023, Alexandra Rose Charity (reg. in England and Wales, #00279157) */
+/* Copyright (c) 2025, Alexandra Rose Charity (reg. in England and Wales, #00279157) */
 /* --------------------------------------------------------------
 
    Typography
@@ -13,6 +13,7 @@ $arc_headings: 'Roboto Slab', serif;
    Colours
 
 -------------------------------------------------------------- */
+@use 'sass:color';
 
 $arc_white: white;
 $arc_faded: #f2f2f2;
@@ -24,7 +25,7 @@ $arc_focus: #dcb9d2;
 $arc_rose: #a74e94;
 $arc_copy: #433740;
 $arc_selected: #efeeed;
-$arc_row: lighten($arc_bg, 1%);
+$arc_row: color.scale($arc_bg, $lightness:1%);
 $arc_error: #d2232a;
 $arc_success: rgba(111, 206, 119, 0.85);
 $arc_warning: rgba(245, 130, 31, 0.85);

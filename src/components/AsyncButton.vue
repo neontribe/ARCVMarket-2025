@@ -57,7 +57,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../sass/vars';
+@use '../sass/vars' as *;
 .spinner,
 .validate,
 .fail,

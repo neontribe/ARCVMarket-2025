@@ -39,6 +39,15 @@ export default defineConfig({
             '@': fileURLToPath(new URL('./src', import.meta.url))
         }
     },
+    css: {
+        preprocessorOptions: {
+            scss: {
+                api: 'modern-compiler',
+                // don't warn about css dependencies we can't control
+                quietDeps: true,
+            }
+        }
+    },
     define: {
         BRANCH: JSON.stringify(
             execSync('git rev-parse --abbrev-ref HEAD').toString().trim()
