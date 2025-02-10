@@ -67,7 +67,7 @@ export default {
                     email: this.email,
                     token: this.token
                 },
-                function () {
+                () => {
                     if (this.netMgr.isAuth()) {
                         // If we are logged in, push to the default route
                         this.$router.push('/');
@@ -83,14 +83,14 @@ export default {
                             }
                         });
                     }
-                }.bind(this),
-                function (error) {
+                },
+                (error) => {
                     // This only shows the *first* error. User will have to resolve multiple errors in turn.
                     this.setMessage(
                         error.response.data.password[0],
                         constants.MESSAGE_ERROR
                     );
-                }.bind(this)
+                }
             );
         }
     }

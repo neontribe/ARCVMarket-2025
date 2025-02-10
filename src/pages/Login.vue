@@ -97,19 +97,14 @@ export default {
 
             Store.authenticate(
                 userApiCredentials,
-                function () {
+                () => {
                     this.errorMessage = null;
-                    // I don't like this here, but it's the only place it works for now.
-                    let redirect = this.$route.query.redirect;
-                    if (!redirect) {
-                        redirect = '/scan';
-                    }
+                    const redirect = this.$route.query.redirect ?? '/scan';
                     this.$router.push({ path: redirect });
-                }.bind(this),
-
-                function (errMsg) {
+                },
+                (errMsg) => {
                     this.setMessage(errMsg, constants.MESSAGE_ERROR);
-                }.bind(this)
+                }
             );
         }
     }

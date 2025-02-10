@@ -1,9 +1,10 @@
 import NetMgr from './services/netMgr.js';
 import constants from './constants';
 import { parseLinkHeader } from '@web3-storage/parse-link-header';
+import { reactive } from 'vue';
 
 // TODO store.error needs store based setter.
-let store = {
+const store = reactive({
     user: {
         id: 1,
         traders: []
@@ -27,7 +28,7 @@ let store = {
     },
     gettingRecVouchers: 0,
     pendedVoucherPagination: {}
-};
+});
 
 /**
  * Reset the store object
@@ -98,11 +99,11 @@ store.authenticate = function (userApiCredentials, success, failure) {
     this.netMgr.apiPost(
         '/login',
         userApiCredentials,
-        function (response) {
+        (response) => {
             this.netMgr.setToken(response.data);
             success();
-        }.bind(this),
-        function (error) {
+        },
+        (error) => {
             let err;
             switch (error.response.status) {
                 case 400: // Passport has started retuning a 400 for bad password
@@ -115,7 +116,7 @@ store.authenticate = function (userApiCredentials, success, failure) {
             if (failure) {
                 failure(err);
             }
-        }.bind(this)
+        }
     );
 };
 
@@ -148,9 +149,11 @@ store.unAuthenticate = function (success, failure) {
 /**
  * Updates the current User's Traders
  */
-store.getUserTraders = function () {
+store.getUserTraders = async function () {
     this.netMgr.apiGet('/traders', (response) => {
-        this.user.traders.splice(0, this.user.traders.length, response.data);
+        this.user.traders.splice(0, this.user.traders.length, ...response.data);
+        console.log('fetched');
+        console.log(this.user.traders);
     });
 };
 
@@ -160,7 +163,7 @@ store.getUserTraders = function () {
  * @returns {boolean}
  */
 store.setUserTrader = function (id) {
-    this.trader = this.user.traders[0].filter(function (userTrader) {
+    this.trader = this.user.traders.filter(function (userTrader) {
         return userTrader.id === id;
     })[0];
     this.trader.pendedVouchers = [];

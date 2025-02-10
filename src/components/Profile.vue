@@ -23,7 +23,7 @@ export default {
     },
     computed: {
         changeTrader: function () {
-            return this.userTraders[0] && this.userTraders[0].length > 1;
+            return this.userTraders && this.userTraders.length > 1;
         }
     },
     methods: {

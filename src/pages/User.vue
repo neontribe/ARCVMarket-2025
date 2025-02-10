@@ -11,7 +11,7 @@
                     @keyup.enter="onContinue"
                 >
                     <div
-                        v-for="(trader, index) in this.userTraders[0]"
+                        v-for="(trader, index) in this.userTraders"
                         :key="trader.id"
                     >
                         <div class="multiple-choice">
@@ -55,8 +55,8 @@ export default {
     },
     watch: {
         userTraders: function (traders) {
-            if (traders[0].length === 1) {
-                Store.setUserTrader(traders[0][0].id);
+            if (traders.length === 1) {
+                Store.setUserTrader(traders[0].id);
                 this.redirect();
             }
         }
@@ -64,7 +64,7 @@ export default {
     computed: {
         traderList: function () {
             console.log('computed');
-            return this.userTraders[0]?.length > 1 || false;
+            return this.userTraders?.length > 1 || false;
         }
     },
     mounted: function () {
