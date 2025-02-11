@@ -23,9 +23,7 @@
                                 name="radio-group"
                                 required
                             />
-                            <label :for="'radio-' + index">{{
-                                trader.name
-                            }}</label>
+                            <label :for="'radio-' + index">{{trader.name}}</label>
                         </div>
                     </div>
 
@@ -53,24 +51,17 @@ export default {
             checked: [] // Is at least one radio button clicked.
         };
     },
-    watch: {
-        userTraders: function (traders) {
-            if (traders.length === 1) {
-                Store.setUserTrader(traders[0].id);
-                this.redirect();
-            }
-        }
-    },
     computed: {
         traderList: function () {
-            console.log('computed');
-            return this.userTraders?.length > 1 || false;
-        }
+            if (this.userTraders?.length === 1) {
+                Store.setUserTrader(this.userTraders[0].id);
+                this.redirect();
+            }
+            return this.userTraders?.length > 1;
+        },
     },
     mounted: function () {
         Store.getUserTraders();
-        console.log(this.userTraders);
-        console.log('mounted');
     },
     methods: {
         onContinue: function () {

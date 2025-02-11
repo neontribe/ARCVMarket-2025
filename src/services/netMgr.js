@@ -405,13 +405,7 @@ function responseErrorInterceptor(error) {
     return Promise.reject(error);
 }
 
-// set cookie in devtools to enable mocks in development skipping the local API
-// document.cookie = "arcv_use_mocks=true;max-age=" + 86400*30;
-if (
-    Config.useMocks ||
-    (Config.env === 'development' &&
-        document.cookie.indexOf('arcv_use_mocks=true') >= 0)
-) {
+if (Config.useMocks === 'true') {
     NetMgr.mockOn();
 }
 

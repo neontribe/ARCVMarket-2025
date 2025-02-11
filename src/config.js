@@ -18,8 +18,7 @@ if (location.hostname.match(/localhost|(\.(dev|test))$/)) {
         import.meta.env.VITE_API_BASE ||
         window.location.protocol + '//arcv-service.test/api';
     useMocks =
-        import.meta.env.VITE_USE_MOCKS ||
-        document.cookie.indexOf('arcv_use_mocks=true') >= 0;
+        import.meta.env.VITE_USE_MOCKS;
 }
 console.log('ENV:', import.meta.env.MODE);
 console.log('apiBase', apiBase);
