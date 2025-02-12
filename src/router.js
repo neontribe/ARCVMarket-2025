@@ -7,6 +7,7 @@ import Payment from '@/pages/Payment.vue';
 import Login from '@/pages/Login.vue';
 import ChangePassword from '@/pages/ChangePassword.vue';
 import User from '@/pages/User.vue';
+import Request from '@/pages/Request.vue';
 
 /*
  route access rules

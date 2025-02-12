@@ -32,11 +32,10 @@
 
                     <div class="footer-links">
                         <div>
-                            <router-link
-                                v-bind:to="'/request'"
+                            <RouterLink
+                                to="/request"
                                 class="secondary"
-                                >Forgot your password?</router-link
-                            >
+                            >Forgot your password?</RouterLink>
                         </div>
                         <div>
                             <a
