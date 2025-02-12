@@ -28,7 +28,6 @@
                             @keydown="onKeypressSponsorBox"
                             v-on:paste.prevent
                             @keydown.enter.prevent
-                            v-bind:class="{ 'input-text-hidden': queued }"
                             autocomplete="off"
                             autofocus="autofocus"
                         />
@@ -44,7 +43,6 @@
                             v-on:paste.prevent
                             v-on:keyup.delete="onDelVoucherBox"
                             autocomplete="off"
-                            v-bind:class="{ 'input-text-hidden': queued }"
                         />
                     </div>
                     <async-button
