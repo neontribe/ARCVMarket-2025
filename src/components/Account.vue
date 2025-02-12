@@ -281,9 +281,9 @@ export default {
         pgBtnIsDisabled: function (key) {
             const pg = this.voucherPagination || {};
             if (
-                pg.hasOwnProperty('first') &&
-                pg.hasOwnProperty('last') &&
-                pg.hasOwnProperty('current')
+                pg?.first !== undefined &&
+                pg?.last !== undefined &&
+                pg?.current !== undefined
             ) {
                 // check first and last aren't the same page
                 if (pg.first.page !== pg.last.page) {
@@ -302,15 +302,15 @@ export default {
         },
         pageOfPages: function () {
             const pg = this.voucherPagination || {};
-            return pg.hasOwnProperty('current') ?
-                    pg['current'].page + ' of ' + pg['last'].page
+            return (pg?.current?.page !== null) ?
+                    pg?.current.page + ' of ' + pg?.last.page
                 :   '';
         },
         pgChangePage: async function (event) {
             this.showSpinner();
             const key = event.target.id;
             const pg = this.voucherPagination || {};
-            const page = pg.hasOwnProperty(key) ? pg[key].page : 1;
+            const page = pg[key]?.page ?? 1;
             await Store.getVoucherPaymentState(page);
             this.hideSpinner();
         }

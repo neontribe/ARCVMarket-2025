@@ -52,11 +52,8 @@ export default {
             return this.recVouchers[0] && this.recVouchers[0].length > 0;
         },
         showIcon: function () {
-            if (Store.trader.hasOwnProperty('featureOverride')) {
-                const { tap } = Store.trader.featureOverride.pageAccess;
-                return tap;
-            }
-            return true;
+            const { tap } = Store.trader?.featureOverride?.pageAccess || true;
+            return tap;
         }
     }
 };
