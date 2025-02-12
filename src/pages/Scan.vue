@@ -88,7 +88,7 @@ export default {
         };
     },
     methods: {
-        onRecordVoucher: function (event) {
+        onRecordVoucher: function () {
             //TODO: some proper validation
             // When the voucher is submitted, cancel the typing in voucher box timer
             TIMER = null;

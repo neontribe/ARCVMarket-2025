@@ -1,6 +1,7 @@
 <template id="queue">
-    <transition name="fade" v-if="currentlyShown">
-        <div class="content narrow queuedVouchers">
+    <Transition name="fade">
+        <div v-if="currentlyShown"
+            class="content narrow queuedVouchers">
             <h1>Voucher not added</h1>
 
             <message
@@ -50,7 +51,7 @@
                 </div>
             </div>
         </div>
-    </transition>
+    </Transition>
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template id="message">
     <transition name="fade" v-if="visible">
-        <div
+        <div v-if="true"
             class="message"
             v-bind:class="{ error: this.error, success: this.success, warning: this.warning }"
             v-html="text"
