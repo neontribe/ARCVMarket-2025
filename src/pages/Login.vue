@@ -67,10 +67,12 @@ import constants from '../constants';
 
 export default {
     name: 'login',
-    props: ['passedMessage'],
     mixins: [mixin.messages],
     data: function () {
         return {
+            // TODO: Put in a store.
+            // https://github.com/vuejs/router/blob/main/packages/router/CHANGELOG.md#414-2022-08-22
+            passedMessage: window.history.state?.passedMessage,
             username: null,
             password: null,
             remember: true,
@@ -80,8 +82,9 @@ export default {
         };
     },
     mounted: function () {
+        console.log(this.$router.state);
         if (this.passedMessage) {
-            this.setMessage(this.passedMessage.text, this.passedMessage.state);
+            this.setMessage(this.passedMessage?.text, this.passedMessage?.state);
         }
     },
     methods: {

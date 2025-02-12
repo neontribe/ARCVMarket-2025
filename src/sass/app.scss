@@ -166,7 +166,7 @@ section {
         color: $arc_copy;
         &:before {
             font-weight: bold;
-            font-family: FontAwesome, serif;
+            font-family: 'Font Awesome 6 Free', serif;
             padding-right: 0.5em;
         }
     }
@@ -837,7 +837,7 @@ h1.expandable.queue {
 
         &[type='checkbox'] + label::before {
             font-weight: bold;
-            font-family: FontAwesome, serif;
+            font-family: 'Font Awesome 6 Free', serif;
             content: '\f0da';
             color: $arc_rose;
         }

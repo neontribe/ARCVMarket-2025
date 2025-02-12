@@ -2,7 +2,7 @@
     <transition name="fade" v-if="visible">
         <div
             class="message"
-            v-bind:class="{ error: error, success: success, warning: warning }"
+            v-bind:class="{ error: this.error, success: this.success, warning: this.warning }"
             v-html="text"
         ></div>
     </transition>

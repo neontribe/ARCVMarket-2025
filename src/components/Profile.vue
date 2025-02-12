@@ -31,7 +31,7 @@ export default {
             Store.unAuthenticate();
             const routeObj = {
                 name: 'login',
-                params: {
+                state: {
                     passedMessage: {
                         text: constants.copy.USER_LOGOUT,
                         state: constants.MESSAGE_SUCCESS

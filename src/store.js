@@ -152,8 +152,6 @@ store.unAuthenticate = function (success, failure) {
 store.getUserTraders = async function () {
     this.netMgr.apiGet('/traders', (response) => {
         this.user.traders.splice(0, this.user.traders.length, ...response.data);
-        console.log('fetched');
-        console.log(this.user.traders);
     });
 };
 

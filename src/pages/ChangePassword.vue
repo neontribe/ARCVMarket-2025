@@ -75,7 +75,7 @@ export default {
                         // otherwise, push to the login page
                         this.$router.push({
                             name: 'login',
-                            params: {
+                            state: {
                                 passedMessage: {
                                     text: constants.copy.PASSWORD_RESET,
                                     state: constants.MESSAGE_SUCCESS
@@ -85,6 +85,7 @@ export default {
                     }
                 },
                 (error) => {
+                    console.log(error);
                     // This only shows the *first* error. User will have to resolve multiple errors in turn.
                     this.setMessage(
                         error.response.data.password[0],

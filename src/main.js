@@ -54,7 +54,7 @@ EventBus.on('NetMgr.logout', function (statusCode = null) {
                 message.text = constants.copy.UNKNOWN_EVENT;
                 message.state = constants.MESSAGE_ERROR;
         }
-        routeObj.params = { passedMessage: message };
+        routeObj.state = { passedMessage: message };
     }
     router.push(routeObj);
 });
