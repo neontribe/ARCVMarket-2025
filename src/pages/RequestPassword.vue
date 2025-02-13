@@ -42,7 +42,7 @@ import mixin from '../mixins/mixins';
 import constants from '../constants';
 
 export default {
-    name: 'request',
+    name: 'RequestPassword',
     mixins: [mixin.messages],
     data: function () {
         return {

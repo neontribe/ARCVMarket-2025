@@ -105,7 +105,7 @@ import MessageMix from '../mixins/MessageMixin';
 import AsyncButtonMixin from '../mixins/AsyncButtonMixin';
 
 export default {
-    name: 'payment',
+    name: 'PaymentPage',
     mixins: [MessageMix, AsyncButtonMixin],
     data: () => ({
         recVouchers: Store.trader.recVouchers,

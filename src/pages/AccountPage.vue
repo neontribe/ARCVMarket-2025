@@ -217,12 +217,12 @@
 <script>
 import Store from '../store.js';
 import NetMgr from '../services/netMgr.js';
-import constants from '../constants';
+import constants from '../constants.js';
 import SpinnerMix from '../mixins/SpinnerMixin.js';
-import MessageMix from '../mixins/MessageMixin';
+import MessageMix from '../mixins/MessageMixin.js';
 
 export default {
-    name: 'account',
+    name: 'AccountPage',
     mixins: [MessageMix, SpinnerMix],
     data() {
         return {

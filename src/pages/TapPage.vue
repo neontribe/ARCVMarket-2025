@@ -68,7 +68,7 @@ import MessageMixin from '../mixins/MessageMixin';
 const RESULT_TIMER = 1000;
 
 export default {
-    name: 'tap',
+    name: 'TapPage',
     mixins: [MessageMixin, AsyncButtonMixin],
     components: {
         Queue

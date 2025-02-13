@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Store from '@/store.js';
-import Tap from '@/pages/Tap.vue';
-import Account from '@/components/Account.vue';
-import Scan from '@/pages/Scan.vue';
-import Payment from '@/pages/Payment.vue';
-import Login from '@/pages/Login.vue';
-import ChangePassword from '@/pages/ChangePassword.vue';
-import User from '@/pages/User.vue';
-import Request from '@/pages/Request.vue';
+import Store from './store.js';
+import TapPage from './pages/TapPage.vue';
+import AccountPage from './pages/AccountPage.vue';
+import ScanPage from './pages/ScanPage.vue';
+import PaymentPage from './pages/PaymentPage.vue';
+import LoginPage from './pages/LoginPage.vue';
+import ChangePassword from './pages/ChangePassword.vue';
+import UserPage from './pages/UserPage.vue';
+import RequestPassword from './pages/RequestPassword.vue';
 
 /*
  route access rules
@@ -20,7 +20,7 @@ import Request from '@/pages/Request.vue';
 const routes = [
     {
         path: '/',
-        component: Tap,
+        component: TapPage,
         meta: { auth: true },
         beforeEnter: function (to, from, next) {
             const param =
@@ -32,28 +32,28 @@ const routes = [
     },
     {
         path: '/account',
-        component: Account,
+        component: AccountPage,
         meta: { auth: true }
     },
     {
         path: '/scan',
-        component: Scan,
+        component: ScanPage,
         meta: { auth: true }
     },
-    { path: '/payment', component: Payment, meta: { auth: true } },
+    { path: '/payment', component: PaymentPage, meta: { auth: true } },
     {
         path: '/login',
         name: 'login',
-        component: Login,
+        component: LoginPage,
         meta: { auth: false },
     },
-    { path: '/request', component: Request, meta: { auth: false } },
+    { path: '/request', component: RequestPassword, meta: { auth: false } },
     {
         path: '/change-password',
         component: ChangePassword,
         meta: { auth: false }
     },
-    { path: '/user', component: User, meta: { auth: true } },
+    { path: '/user', component: UserPage, meta: { auth: true } },
     { path: '/:pathMatch(.*)', redirect: '/' }
 ];
 

@@ -44,7 +44,7 @@
 <script>
 import Store from '../store.js';
 export default {
-    name: 'user',
+    name: 'UserPage',
     data() {
         return {
             userTraders: Store.user.traders,

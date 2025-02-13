@@ -73,7 +73,7 @@ const RESULT_TIMER = 1000;
 let TIMER = null;
 
 export default {
-    name: 'scan',
+    name: 'ScanPage',
     mixins: [MessageMixin, AsyncButtonMixin],
     components: {
         Queue

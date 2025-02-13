@@ -66,7 +66,7 @@ import mixin from '../mixins/mixins';
 import constants from '../constants';
 
 export default {
-    name: 'login',
+    name: 'LoginPage',
     mixins: [mixin.messages],
     data: function () {
         return {
