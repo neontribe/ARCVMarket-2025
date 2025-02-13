@@ -255,7 +255,11 @@ export default {
     },
     mounted: function () {
         Store.maybeGetRecVouchers();
-        this.$refs.sponsorBox.focus();
+        this.$nextTick(() => {
+            if (this.$refs.sponsorBox) {
+                this.$refs.sponsorBox.focus();
+            }
+        });
     }
 };
 </script>

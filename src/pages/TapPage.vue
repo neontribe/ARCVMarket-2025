@@ -231,6 +231,11 @@ export default {
     },
     mounted: function () {
         Store.maybeGetRecVouchers();
+        this.$nextTick(() => {
+            if (this.$refs.voucherBox) {
+                this.$refs.voucherBox.focus();
+            }
+        });
     }
 };
 </script>
