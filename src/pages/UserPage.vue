@@ -23,7 +23,9 @@
                                 name="radio-group"
                                 required
                             />
-                            <label :for="'radio-' + index">{{trader.name}}</label>
+                            <label :for="'radio-' + index">{{
+                                trader.name
+                            }}</label>
                         </div>
                     </div>
 
@@ -58,7 +60,7 @@ export default {
                 this.redirect();
             }
             return this.userTraders?.length > 1;
-        },
+        }
     },
     mounted: function () {
         Store.getUserTraders();

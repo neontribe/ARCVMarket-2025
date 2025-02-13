@@ -2,8 +2,8 @@
     <div class="profile-bar">
         <div>
             <strong> {{ selectedTrader.name }} </strong>
-            <router-link v-bind:to="'/user'" v-if="changeTrader"
-                > (Change trader)</router-link
+            <router-link v-bind:to="'/user'" v-if="changeTrader">
+                (Change trader)</router-link
             >
         </div>
         <a v-on:click="onLogout">Log out</a>

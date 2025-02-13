@@ -299,7 +299,7 @@ export default {
         },
         pageOfPages: function () {
             const pg = this.voucherPagination || {};
-            return (pg?.current?.page !== null) ?
+            return pg?.current?.page !== null ?
                     pg?.current.page + ' of ' + pg?.last.page
                 :   '';
         },

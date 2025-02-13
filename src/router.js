@@ -45,7 +45,7 @@ const routes = [
         path: '/login',
         name: 'login',
         component: LoginPage,
-        meta: { auth: false },
+        meta: { auth: false }
     },
     { path: '/request', component: RequestPassword, meta: { auth: false } },
     {

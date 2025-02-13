@@ -1,9 +1,13 @@
 <template id="queue">
     <Transition name="fade">
-        <div v-if="currentlyShown"
-            class="content narrow queuedVouchers">
+        <div v-if="currentlyShown" class="content narrow queuedVouchers">
             <h1>Voucher not added</h1>
-            <p>You have <strong>{{queueStatus.count}}</strong> voucher{{queueStatus.plural}} not added. Press here to add.</p>
+            <p>
+                You have <strong>{{ queueStatus.count }}</strong> voucher{{
+                    queueStatus.plural
+                }}
+                not added. Press here to add.
+            </p>
             <async-button
                 id="submit-voucher"
                 v-bind:state="state"
@@ -105,7 +109,7 @@ export default {
         queueStatus: function () {
             const count = this.vouchers.length;
             const plural = count === 1 ? '' : 's';
-            return { count: count, plural: plural};
+            return { count: count, plural: plural };
         }
     },
     methods: {

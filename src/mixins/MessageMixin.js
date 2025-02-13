@@ -16,7 +16,7 @@ export default {
 
     methods: {
         setMessage(text = '', state = constants.MESSAGE_STATUS) {
-            this.message.text =  text;
+            this.message.text = text;
             this.message.state = state;
         },
         emitMessage(text, state = null, eventName = 'message-update') {

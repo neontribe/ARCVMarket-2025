@@ -4,7 +4,11 @@
             <div class="content fullwidth">
                 <div v-if="vouchersAdded">
                     <h1>
-                        You can request payment for <strong>{{ voucherCount }}</strong> voucher<span v-if="voucherCount > 1">s</span>.
+                        You can request payment for
+                        <strong>{{ voucherCount }}</strong> voucher<span
+                            v-if="voucherCount > 1"
+                            >s</span
+                        >.
                     </h1>
                     <transition name="fade">
                         <message
@@ -60,10 +64,7 @@
                                         <div class="icon">
                                             <a
                                                 v-on:click.prevent="
-                                                    onDelete(
-                                                        recVoucher,
-                                                        index
-                                                    )
+                                                    onDelete(recVoucher, index)
                                                 "
                                                 title="Delete voucher code"
                                                 ><i

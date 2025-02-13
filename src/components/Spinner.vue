@@ -49,7 +49,7 @@ p {
     width: 64px;
     height: 64px;
     margin: 8px;
-    border: 8px solid #6916a0;
+    border: 8px solid;
     border-radius: 50%;
     animation: spinner 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
     border-color: #6916a0 transparent transparent transparent;

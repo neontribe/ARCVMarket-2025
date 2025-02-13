@@ -10,10 +10,6 @@
 @use './vars' as *;
 @use './fonts';
 
-
-
-
-
 /* --------------------------------------------------------------
 
    Layout
@@ -223,7 +219,7 @@ input[type='submit']::-moz-focus-inner {
 }
 
 button:disabled {
-    background-color: color.scale($arc_rose, $lightness:15%);
+    background-color: color.scale($arc_rose, $lightness: 15%);
     color: $arc_white;
 }
 

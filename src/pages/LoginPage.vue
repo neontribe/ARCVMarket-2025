@@ -32,10 +32,9 @@
 
                     <div class="footer-links">
                         <div>
-                            <RouterLink
-                                to="/request"
-                                class="secondary"
-                            >Forgot your password?</RouterLink>
+                            <RouterLink to="/request" class="secondary"
+                                >Forgot your password?</RouterLink
+                            >
                         </div>
                         <div>
                             <a
@@ -83,7 +82,10 @@ export default {
     },
     mounted: function () {
         if (this.passedMessage) {
-            this.setMessage(this.passedMessage?.text, this.passedMessage?.state);
+            this.setMessage(
+                this.passedMessage?.text,
+                this.passedMessage?.state
+            );
         }
     },
     methods: {
