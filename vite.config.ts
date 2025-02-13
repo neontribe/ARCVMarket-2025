@@ -6,12 +6,20 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 import VueDevTools from 'vite-plugin-vue-devtools';
 import { VitePWA } from 'vite-plugin-pwa';
 import { execSync } from 'child_process';
+import legacy from '@vitejs/plugin-legacy';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+    esbuild: {
+        target: 'es2017'
+    },
     plugins: [
         vue(),
         vueJsx(),
+        legacy({
+            targets: ['defaults', 'since 2017'],
+            renderModernChunks: false,
+        }),
         VueDevTools(),
         VitePWA({
             registerType: 'autoUpdate',
