@@ -3,11 +3,7 @@
         <div v-if="currentlyShown"
             class="content narrow queuedVouchers">
             <h1>Voucher not added</h1>
-
-            <message
-                v-bind:text="message.text"
-                v-bind:state="message.state"
-            />
+            <p>You have <strong>{{queueStatus.count}}</strong> voucher{{queueStatus.plural}} not added. Press here to add.</p>
             <async-button
                 id="submit-voucher"
                 v-bind:state="state"
@@ -79,8 +75,11 @@ export default {
         this.message.text = this.queueStatus;
     },
     watch: {
+        /*
         queue: {
             handler: function (val) {
+
+                console.log('watched queue');
                 // Because we submit cached queued vouchers on reload in store we need to watch the status of this..
                 // so that we can reflect any changes in the Queue component.
                 const queueState = val.sendingStatus;
@@ -94,9 +93,7 @@ export default {
             },
             deep: true
         },
-        vouchers: function () {
-            this.setMessage(this.queueStatus, constants.MESSAGE_STATUS);
-        }
+        */
     },
     mounted: function () {
         if (this.queue.sendingStatus) {
@@ -110,14 +107,9 @@ export default {
             );
         },
         queueStatus: function () {
-            const pluralise = this.vouchers.length !== 1 ? 's' : '';
-            return (
-                'You have <strong>' +
-                this.vouchers.length +
-                '</strong> voucher' +
-                pluralise +
-                ' not added. Press here to add.'
-            );
+            const count = this.vouchers.length;
+            const plural = count === 1 ? '' : 's';
+            return { count: count, plural: plural};
         }
     },
     methods: {

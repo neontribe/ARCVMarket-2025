@@ -81,12 +81,7 @@ store.getTraderVoucherList = function () {
  */
 store.getVouchersOnlineStatus = function () {
     // Loop through the voucher list. If we get to one that was added off-line, return with false.
-    for (let voucher in this.trader.vouchers) {
-        if (!this.trader.vouchers[voucher].online) {
-            return false;
-        }
-    }
-    return true;
+    return this.trader.vouchers.every(voucher => voucher.online);
 };
 
 /**
