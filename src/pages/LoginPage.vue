@@ -8,7 +8,7 @@
                     <message
                         v-bind:text="message.text"
                         v-bind:state="message.state"
-                    ></message>
+                    />
                 </transition>
 
                 <div>
@@ -82,7 +82,6 @@ export default {
         };
     },
     mounted: function () {
-        console.log(this.$router.state);
         if (this.passedMessage) {
             this.setMessage(this.passedMessage?.text, this.passedMessage?.state);
         }

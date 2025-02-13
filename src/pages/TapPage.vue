@@ -8,7 +8,7 @@
                     <message
                         v-bind:state="message.state"
                         v-bind:text="message.text"
-                    ></message>
+                    />
 
                     <label id="lblSponsorBox" class="hidden" for="sponsorBox"
                         >Sponsor Code</label

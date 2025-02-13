@@ -7,7 +7,7 @@
             <message
                 v-bind:text="message.text"
                 v-bind:state="message.state"
-            ></message>
+            />
             <async-button
                 id="submit-voucher"
                 v-bind:state="state"

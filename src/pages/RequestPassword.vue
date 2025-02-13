@@ -14,7 +14,7 @@
                         <message
                             v-bind:text="message.text"
                             v-bind:state="message.state"
-                        ></message>
+                        />
                         <label for="userName">Your email address</label>
                         <input
                             type="text"

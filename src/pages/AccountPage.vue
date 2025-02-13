@@ -8,7 +8,7 @@
                     <message
                         v-bind:text="message.text"
                         v-bind:state="message.state"
-                    ></message>
+                    />
                 </transition>
                 <div v-if="spinnerActive">
                     <spinner
@@ -218,12 +218,12 @@
 import Store from '../store.js';
 import NetMgr from '../services/netMgr.js';
 import constants from '../constants.js';
-import SpinnerMix from '../mixins/SpinnerMixin.js';
-import MessageMix from '../mixins/MessageMixin.js';
+import SpinnerMixin from '../mixins/SpinnerMixin.js';
+import MessageMixin from '../mixins/MessageMixin.js';
 
 export default {
     name: 'AccountPage',
-    mixins: [MessageMix, SpinnerMix],
+    mixins: [MessageMixin, SpinnerMixin],
     data() {
         return {
             voucherPayments: Store.trader.pendedVouchers,

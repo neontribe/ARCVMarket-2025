@@ -14,7 +14,7 @@
                         <message
                             v-bind:text="message.text"
                             v-bind:state="message.state"
-                        ></message>
+                        />
                     </transition>
 
                     <div class="content narrow">
@@ -101,12 +101,12 @@
 <script>
 import Store from '../store.js';
 import constants from '../constants';
-import MessageMix from '../mixins/MessageMixin';
+import MessageMixin from '../mixins/MessageMixin';
 import AsyncButtonMixin from '../mixins/AsyncButtonMixin';
 
 export default {
     name: 'PaymentPage',
-    mixins: [MessageMix, AsyncButtonMixin],
+    mixins: [MessageMixin, AsyncButtonMixin],
     data: () => ({
         recVouchers: Store.trader.recVouchers,
         netMgr: Store.netMgr,

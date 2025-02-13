@@ -11,7 +11,7 @@
                         <message
                             v-bind:text="message.text"
                             v-bind:state="message.state"
-                        ></message>
+                        />
                         <label for="resetPassword">Reset password</label>
                         <input
                             type="password"
