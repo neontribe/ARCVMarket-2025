@@ -850,6 +850,7 @@ h1.expandable.queue {
         border-top: 1px solid $arc_border;
         width: 100%;
         overflow: hidden;
+        line-height: 3;
         &.thead {
             background-color: white;
             border: 0;

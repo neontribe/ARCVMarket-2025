@@ -85,7 +85,6 @@
                                 </div>
                                 <div class="tab-content">
                                     <div class="tab inner-thead">
-                                        <label></label>
                                         <div class="row-code">
                                             <div>Voucher code</div>
                                             <div>Voucher added on</div>
@@ -98,16 +97,14 @@
                                         ) in payment.vouchers"
                                         :key="index"
                                     >
-                                        <label>
-                                            <div class="row-code">
-                                                <div class="code">
-                                                    {{ voucher.code }}
-                                                </div>
-                                                <div class="date">
-                                                    {{ voucher.recorded_on }}
-                                                </div>
+                                        <div class="row-code">
+                                            <div class="code">
+                                                {{ voucher.code }}
                                             </div>
-                                        </label>
+                                            <div class="date">
+                                                {{ voucher.recorded_on }}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

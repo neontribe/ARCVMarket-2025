@@ -4,11 +4,7 @@
             <div class="content fullwidth">
                 <div v-if="vouchersAdded">
                     <h1>
-                        You can request payment for
-                        <strong>{{ voucherCount }}</strong> voucher<span
-                            v-if="voucherCount > 1"
-                            >s</span
-                        >.
+                        You can request payment for <strong>{{ voucherCount }}</strong> voucher<span v-if="voucherCount > 1">s</span>.
                     </h1>
                     <transition name="fade">
                         <message
@@ -46,12 +42,10 @@
                         >
                             <!-- Tab header -->
                             <div class="tab thead">
-                                <label>
-                                    <div class="row-code">
-                                        <div>Voucher code</div>
-                                        <div>Voucher added on</div>
-                                    </div>
-                                </label>
+                                <div class="row-code">
+                                    <div>Voucher code</div>
+                                    <div>Voucher added on</div>
+                                </div>
                             </div>
 
                             <!-- Tab row -->
@@ -60,29 +54,27 @@
                                 v-for="(recVoucher, index) in recVouchers[0]"
                                 :key="recVoucher.code"
                             >
-                                <label>
-                                    <div class="row-code">
-                                        <div>
-                                            {{ recVoucher.code }}
-                                            <div class="icon">
-                                                <a
-                                                    v-on:click.prevent="
-                                                        onDelete(
-                                                            recVoucher,
-                                                            index
-                                                        )
-                                                    "
-                                                    title="Delete voucher code"
-                                                    ><i
-                                                        class="fa fa-trash"
-                                                        aria-hidden="true"
-                                                    ></i
-                                                ></a>
-                                            </div>
+                                <div class="row-code">
+                                    <div>
+                                        {{ recVoucher.code }}
+                                        <div class="icon">
+                                            <a
+                                                v-on:click.prevent="
+                                                    onDelete(
+                                                        recVoucher,
+                                                        index
+                                                    )
+                                                "
+                                                title="Delete voucher code"
+                                                ><i
+                                                    class="fa fa-trash"
+                                                    aria-hidden="true"
+                                                ></i
+                                            ></a>
                                         </div>
-                                        <div>{{ recVoucher.updated_at }}</div>
                                     </div>
-                                </label>
+                                    <div>{{ recVoucher.updated_at }}</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -114,10 +106,10 @@ export default {
     }),
     computed: {
         voucherCount: function () {
-            return this.vouchersAdded ? this.recVouchers[0].length : 0;
+            return this.recVouchers[0]?.length ?? 0;
         },
         vouchersAdded: function () {
-            return this.recVouchers[0] && this.recVouchers[0].length > 0;
+            return !!this.recVouchers[0]?.length;
         },
         paymentMessage: function () {
             return Store.trader.market.payment_message ?
@@ -153,7 +145,7 @@ export default {
             Store.delVoucher(
                 recVoucher.code,
                 () => {
-                    this.$delete(Store.trader.recVouchers[0], index);
+                    this.recVouchers[0].splice(index, 1);
                     this.setMessage(
                         recVoucher.code + constants.copy.DELETE_VOUCHER_SUCCESS,
                         constants.MESSAGE_SUCCESS

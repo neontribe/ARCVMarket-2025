@@ -25,11 +25,9 @@
                 <div class="voucher-list">
                     <!-- Tab header -->
                     <div class="tab thead">
-                        <label>
-                            <div class="row-code">
-                                <div>Voucher code</div>
-                            </div>
-                        </label>
+                        <div class="row-code">
+                            <div>Voucher code</div>
+                        </div>
                     </div>
 
                     <!-- Tab row -->
@@ -38,11 +36,9 @@
                         v-for="voucher in vouchers"
                         :key="voucher.code"
                     >
-                        <label>
-                            <div class="row-code">
-                                <div>{{ voucher.code }}</div>
-                            </div>
-                        </label>
+                        <div class="row-code">
+                            <div>{{ voucher.code }}</div>
+                        </div>
                     </div>
                 </div>
             </div>
