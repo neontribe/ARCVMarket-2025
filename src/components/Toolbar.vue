@@ -52,8 +52,7 @@ export default {
             return this.recVouchers[0] && this.recVouchers[0].length > 0;
         },
         showIcon: function () {
-            const { tap } = Store.trader?.featureOverride?.pageAccess || true;
-            return tap;
+            return Store.trader?.featureOverride?.pageAccess?.tap ?? true;
         }
     }
 };
