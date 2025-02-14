@@ -2,12 +2,45 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Vite App</title>
+        <meta name=copyright content="&copy; (2025), Alexandra Rose Charity (reg. in England and Wales, #00279157)">
+        <meta name="viewport" content="user-scalable=yes, width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#a74e94">
+        <link rel="shortcut icon" href=/icons/favicon.ico>
+        <link rel="icon" href="/icons/favicon.ico" sizes="48x48">
+        <link rel="icon" href="/icons/favicon.svg" sizes="any" type="image/svg+xml">
+        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+
+        <title>Rosie - Rose Voucher Records &amp; Reimbursement</title>
+        <noscript>
+            <style>
+                #message {
+                    position: absolute;
+                    top: 35%;
+                    left: 0;
+                    right: 0;
+                    display: block;
+                    margin: 0 auto;
+                    text-align: center;
+                    max-width: 400px;
+                    padding: 2em;
+                    width: calc(100% - 4em);
+                    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+                }
+                img {
+                    width: 100%;
+                }
+            </style>
+        </noscript>
     </head>
     <body>
-        <div id="app"></div>
+        <div id="app">
+            <noscript>
+                <div id=message>
+                    <img src=logo.png alt="Rose Vouchers">
+                    <p>It appears JavaScript is currently disabled in your browser. Please re-enable it to correctly display the app. Thank you for using Rosie - the Rose Voucher Records &amp; Reimbursement app.</p>
+                </div>
+            </noscript>
+        </div>
         <script type="module" src="/src/main.js"></script>
     </body>
 </html>
