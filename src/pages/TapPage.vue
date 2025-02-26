@@ -52,7 +52,7 @@
             </div>
 
             <div>
-                <queue v-on:message-update="setMessage"></queue>
+                <queue @message-update="setMessage" />
             </div>
         </main>
     </div>
