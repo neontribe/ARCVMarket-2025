@@ -54,14 +54,14 @@
 import Store from '../store.js';
 
 import constants from '../constants';
-import MessageMixin from '../mixins/MessageMixin';
 import AsyncButtonMixin from '../mixins/AsyncButtonMixin';
 
 const RESULT_TIMER = 3000;
 
 export default {
     name: 'queue',
-    mixins: [MessageMixin, AsyncButtonMixin],
+    mixins: [AsyncButtonMixin],
+    emits: ['message-update'],
     data: function () {
         return {
             queue: Store.queue,
@@ -70,30 +70,6 @@ export default {
             netMgr: Store.netMgr,
             vouchers: Store.trader.vouchers
         };
-    },
-    created: function () {
-        this.message.text = this.queueStatus;
-    },
-    watch: {
-        /*
-        queue: {
-            handler: function (val) {
-
-                console.log('watched queue');
-                // Because we submit cached queued vouchers on reload in store we need to watch the status of this..
-                // so that we can reflect any changes in the Queue component.
-                const queueState = val.sendingStatus;
-                if (!queueState && val.sentData) {
-                    const message = val.sentData.data.message;
-                    this.updateOp('validate', RESULT_TIMER);
-                    this.emitMessage(message, constants.MESSAGE_SUCCESS);
-                } else if (!queueState) {
-                    this.state = '';
-                }
-            },
-            deep: true
-        },
-        */
     },
     mounted: function () {
         if (this.queue.sendingStatus) {
@@ -113,6 +89,9 @@ export default {
         }
     },
     methods: {
+        emitMessage: function (text = '', state = null, eventName = 'message-update') {
+            this.$emit(eventName, text, state);
+        },
         onSubmitQueue: function () {
             this.startSpinner();
 
