@@ -78,8 +78,10 @@
                                         <input
                                             type="radio"
                                             name="radio-group"
-                                            @click="recordSelect"
                                             v-bind:id="payment.pended_on"
+                                            v-bind:value="payment.pended_on"
+                                            v-model="selectedDate"
+                                            @click="onRadioClick(payment.pended_on)"
                                         />
                                     </div>
                                 </div>
@@ -185,7 +187,7 @@
                         <div class="cta-buttons">
                             <button
                                 v-on:click="onRequestSubmissionEmail"
-                                :disabled="selected"
+                                :disabled="!this.selectedDate"
                             >
                                 Email selected payment record
                             </button>
@@ -227,16 +229,15 @@ export default {
             voucherPagination: Store.pendedVoucherPagination,
             errorMessage: Store.error,
             goodFeedback: false,
-            selected: true,
-            selectedDate: null
+            selectedDate: null,
         };
     },
     watch: {},
     methods: {
-        recordSelect: function (event) {
-            this.selected = false;
-            // Default to requesting all.
-            this.selectedDate = event.target.id || null;
+        onRadioClick: function(value) {
+            if (this.selectedDate === value) {
+                this.selectedDate = null;
+            }
         },
         onRequestSubmissionEmail: function () {
             const url =
