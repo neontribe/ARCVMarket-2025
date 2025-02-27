@@ -220,6 +220,7 @@ input[type='submit']::-moz-focus-inner {
 
 button:disabled {
     background-color: color.scale($arc_rose, $lightness: 45%);
+    cursor: not-allowed;
     color: $arc_white;
 }
 
@@ -230,6 +231,7 @@ label {
 }
 
 button {
+    cursor: pointer;
     position: relative;
     overflow: hidden;
     transform: translate3d(0, 0, 0);
@@ -549,11 +551,10 @@ main > *:target ~ * {
     margin: 0 auto;
     width: 665px;
     button {
-        cursor: pointer;
         margin: 20px 10px;
         font-size: 0.9em;
         &:disabled {
-            cursor: default;
+            cursor: not-allowed;
         }
         &:nth-child(2) {
             background-color: $arc_gray;
@@ -583,7 +584,6 @@ main > *:target ~ * {
 // Animated submit queued vouchers button
 button.queuedVouchers {
     margin: 20px auto;
-    cursor: pointer;
     transition: all 0.5s ease;
     &:before {
         content: 'Submit vouchers';
