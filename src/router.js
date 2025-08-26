@@ -22,12 +22,11 @@ const routes = [
         path: '/',
         component: TapPage,
         meta: { auth: true },
-        beforeEnter: function (to, from, next) {
-            const param =
-                Store.trader?.featureOverride?.pageAccess === false ?
+        beforeEnter: function () {
+
+            return Store.trader?.featureOverride?.pageAccess === false ?
                     { path: '/scan' }
                 :   null;
-            next(param);
         }
     },
     {
