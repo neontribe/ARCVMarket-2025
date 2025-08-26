@@ -24,7 +24,7 @@ const routes = [
         meta: { auth: true },
         beforeEnter: function () {
 
-            return Store.trader?.featureOverride?.pageAccess === false ?
+            return Store.trader?.featureOverride?.pageAccess?.tap === false ?
                     { path: '/scan' }
                 :   null;
         }
