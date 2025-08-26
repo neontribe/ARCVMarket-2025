@@ -27,7 +27,7 @@
                             id="userPassword"
                             required
                         />
-                        <button type="submit" value="Log In">Log In</button>
+                        <button type="submit" value="Log In" class="cta">Log In</button>
                     </form>
 
                     <div class="footer-links">
