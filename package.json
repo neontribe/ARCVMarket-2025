@@ -26,7 +26,7 @@
     "@fortawesome/free-solid-svg-icons": "6.7.2",
     "@fortawesome/vue-fontawesome": "3.0.8",
     "@web3-storage/parse-link-header": "3.1.0",
-    "axios": "1.7.9",
+    "axios": "1.13.5",
     "axios-etag-cache": "1.4.0",
     "axios-mock-adapter": "^1.22.0",
     "crypto-js": "4.2.0",
